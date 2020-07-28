@@ -10,7 +10,7 @@ namespace Kevin;
 trait UtilityTrait
 {
     /**
-     * Client id
+     * Client id.
      *
      * @var string
      */
@@ -24,6 +24,8 @@ trait UtilityTrait
     private $clientSecret = '';
 
     /**
+     * Options array.
+     *
      * @var array
      */
     private $options;
