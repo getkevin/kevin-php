@@ -2,17 +2,20 @@
     "name": "getkevin/kevin-php",
     "description": "PHP client for kevin. platform.",
     "type": "library",
-    "version": "0.6.0",
+    "version": "0.7.0",
+    "license": "MIT",
     "authors": [
         {
             "name": "Tammi",
             "email": "info@tammi.lt"
         }
     ],
+    "support": {
+        "email": "support@getkevin.eu"
+    },
     "require": {
         "php": ">=7.0",
-        "ext-json": "*",
-        "ext-curl": "*"
+        "ext-json": "*"
     },
     "autoload": {
         "psr-4": {

@@ -6,6 +6,27 @@
 
 - PHP 7.0 or later
 
+## Installation
+
+### Composer
+
+1. To install latest kevin. PHP Client repository using composer:
+
+```
+composer require getkevin/kevin-php
+```
+
+2. Using Composer autoloader, include kevin. PHP Client:
+
+```
+require('vendor/autoload.php');
+```
+
+> Detailed information about available versions can be found at packagist repository:
+>
+>https://packagist.org/packages/getkevin/kevin-php
+
+
 ## Usage Examples
 
 > Parameter names and response data match those defined in API documentation.
@@ -120,3 +141,8 @@ $response = $kevinClient->payment()->getPaymentStatus($paymentId, $attr);
 ## Support
 
 Email: support@getkevin.eu
+
+## License
+
+- **[MIT license](http://opensource.org/licenses/mit-license.php)**
+- Copyright© 2020 <a href="https://www.getkevin.eu/" target="_blank">kevin.</a>

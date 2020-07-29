@@ -67,46 +67,74 @@ trait UtilityTrait
     /**
      * Build default request used for all api calls.
      *
-     * @param $url
-     * @param $type
-     * @param $data
-     * @param $header
+     * @param string $url
+     * @param string $type
+     * @param string $jsonData
+     * @param array $header
      * @return array
      * @throws KevinException
      */
-    private function buildRequest($url, $type, $data, $header)
+    private function buildRequest($url, $type, $jsonData, $header)
     {
-        $ch = curl_init($url);
+        $parsed = parse_url($url);
 
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        switch ($type) {
-            case 'GET';
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-                break;
-            case 'POST';
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-                break;
-            default:
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $type);
-        }
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_ENCODING, '');
-        curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
-
-        $result = curl_exec($ch);
-
-        if (!$result) {
-
-            return $this->returnFailure('Connection failure.');
+        $host = $parsed['host'];
+        if ($parsed['scheme'] === 'https') {
+            $prefix = 'ssl://';
+            $port = 443;
+        } else {
+            $prefix = '';
+            $port = 80;
         }
 
-        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $fp = fsockopen($prefix . $host, $port, $err_no, $err_str, 10);
+        if (!$fp) {
 
-        curl_close($ch);
+            return $this->returnFailure(sprintf('Connection cannot be established to %s', $url));
+        }
+
+        $path = $parsed['path'] . (isset($parsed['query']) ? '?' . $parsed['query'] : '');
+
+        $default_headers = [
+            "$type $path HTTP/1.1",
+            "Host: $host",
+            "Accept: */*",
+            "Accept-Encoding: *"
+        ];
+
+        $data = array_merge($default_headers, $header);
+        $data[] = "Connection: Close";
+        $data[] = ""; // Separator
+
+        if ($type === 'POST') {
+            $data[] = "$jsonData\r\n";
+        }
+
+        foreach ($data as $value) {
+            fputs($fp, "$value\r\n");
+        }
+
+        $response = '';
+        while (!feof($fp)) {
+            $response .= fgets($fp, 8192);
+        }
+        fclose($fp);
+
+        $asd = explode("\r\n\r\n", $response, 2);
+
+        $header = trim($asd[0]);
+        $result = trim($asd[1]);
+
+        $header = explode("\r\n", $header);
+
+        $code = -1;
+        foreach ($header as $value) {
+            if (substr($value, 0, 4) === 'HTTP') {
+                preg_match('/(\b[0-9]{3})\b/', $value, $matches);
+                $code = $matches[1];
+                break;
+            }
+        }
 
         return [
             'code' => $code,
