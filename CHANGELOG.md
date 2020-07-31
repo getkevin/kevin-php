@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.8.0] - 2020-07-31
+- Use options attribute setting on error responses. Throw exception by default.
+
 ## [0.7.0] - 2020-07-29
 - Removed cURL dependency.
 

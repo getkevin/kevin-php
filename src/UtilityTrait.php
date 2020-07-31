@@ -145,22 +145,35 @@ trait UtilityTrait
     /**
      * Build default response array.
      *
-     * @param $response
+     * @param array $response
      * @return array
+     * @throws KevinException
      */
     private function buildResponse($response)
     {
         switch ($response['code']) {
             case 200:
+                $response = json_decode($response['data'], true);
+                $is_error = false;
+                break;
             case 400:
                 $response = json_decode($response['data'], true);
+                $is_error = true;
                 break;
             case 401:
                 $response = ['error' => ['code' => -1, 'name' => 'Unauthorized', 'description' => 'Unauthorized'], 'data' => []];
+                $is_error = true;
                 break;
             default:
                 // Should not happen
-                $response = [];
+                $response = ['error' => ['code' => -1, 'name' => 'Exception', 'description' => 'Unknown error.'], 'data' => []];
+                $is_error = true;
+        }
+
+        if ($is_error) {
+            $error = $response['error'];
+
+            return $this->returnFailure($error['description'], $error['code'], $error['name']);
         }
 
         return $response;
@@ -253,22 +266,24 @@ trait UtilityTrait
      * Return failure response based on option value.
      *
      * @param string $message
+     * @param int $code
+     * @param string $name
      * @return array[]
      * @throws KevinException
      */
-    private function returnFailure($message = '')
+    private function returnFailure($message = '', $code = -1, $name = 'Exception')
     {
         switch ($this->options['error']) {
             case 'exception':
-                throw new KevinException($message);
+                throw new KevinException($message, $code);
 
                 break;
             case 'array':
-                $response = ['error' => ['code' => -1, 'name' => 'Exception', 'description' => $message], 'data' => []];
+                $response = ['error' => ['code' => $code, 'name' => $name, 'description' => $message], 'data' => []];
 
                 break;
             default:
-                throw new KevinException($message);
+                throw new KevinException($message, $code);
         }
 
         return $response;

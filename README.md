@@ -40,9 +40,18 @@ use Kevin\Client;
 
 $clientId = 'my-client-id';
 $clientSecret = 'my-client-secret';
+$options = ['error' => 'array'];
 
-$kevinClient = new Client($clientId, $clientSecret);
+$kevinClient = new Client($clientId, $clientSecret, $options);
 ```
+
+> `$clientId` - Your client id. Your can get it in kevin. platform console.
+
+> `$clientSecret` - Your client secret. Your can get it in kevin. platform console.
+
+> `$options` - Optional options array.
+>
+> - `error` - Defines return type of error data. Possible values are: `array` - returns an array on error, `exception` - throws an exception on error, default value is `exception`.
 
 ### 1. Authentication
 
