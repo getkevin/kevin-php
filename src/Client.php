@@ -7,27 +7,6 @@ class Client
     use UtilityTrait;
 
     /**
-     * Client id.
-     *
-     * @var string
-     */
-    private $clientId = '';
-
-    /**
-     * Client secret.
-     *
-     * @var string
-     */
-    private $clientSecret = '';
-
-    /**
-     * Options array.
-     *
-     * @var array
-     */
-    private $options;
-
-    /**
      * Auth instance.
      *
      * @var Auth
