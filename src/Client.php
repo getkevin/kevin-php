@@ -43,7 +43,7 @@ class Client
      */
     public function auth()
     {
-        $this->auth = $this->auth ?? new Auth($this->clientId, $this->clientSecret, $this->options);
+        $this->auth = isset($this->auth) ? $this->auth : new Auth($this->clientId, $this->clientSecret, $this->options);
 
         return $this->auth;
     }
@@ -56,7 +56,7 @@ class Client
      */
     public function payment()
     {
-        $this->payment = $this->payment ?? new Payment($this->clientId, $this->clientSecret, $this->options);
+        $this->payment = isset($this->payment) ? $this->payment : new Payment($this->clientId, $this->clientSecret, $this->options);
 
         return $this->payment;
     }

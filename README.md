@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-- PHP 7.0 or later
+- PHP 5.6 or later
 
 ## Installation
 
