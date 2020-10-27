@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.9.1] - 2020-10-27
+- Decode url-encoded values.
+
 ## [0.9.0] - 2020-08-13
 - Reduce PHP requirements to 5.6 version.
 - Remove duplicate property definitions.

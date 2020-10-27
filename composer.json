@@ -2,7 +2,7 @@
     "name": "getkevin/kevin-php",
     "description": "PHP client for kevin. platform.",
     "type": "library",
-    "version": "0.9.0",
+    "version": "0.9.1",
     "license": "MIT",
     "authors": [
         {

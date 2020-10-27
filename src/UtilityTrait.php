@@ -87,6 +87,10 @@ trait UtilityTrait
             $port = 80;
         }
 
+        if (preg_match('/(%[0-9A-F]{2})/', $jsonData)) {
+            $jsonData = urldecode($jsonData);
+        }
+
         $fp = fsockopen($prefix . $host, $port, $err_no, $err_str, 10);
         if (!$fp) {
 
@@ -120,10 +124,10 @@ trait UtilityTrait
         }
         fclose($fp);
 
-        $asd = explode("\r\n\r\n", $response, 2);
+        $parts = explode("\r\n\r\n", $response, 2);
 
-        $header = trim($asd[0]);
-        $result = trim($asd[1]);
+        $header = trim($parts[0]);
+        $result = trim($parts[1]);
 
         $header = explode("\r\n", $header);
 
