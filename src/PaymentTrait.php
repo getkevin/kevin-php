@@ -56,6 +56,10 @@ trait PaymentTrait
             'currencyCode',
             'endToEndId',
             'informationUnstructured',
+            'informationStructured' => [
+                'reference',
+                'referenceType'
+            ],
             'requestedExecutionDate',
             'identifier' => [
                 'email'
