@@ -313,11 +313,19 @@ trait UtilityTrait
      */
     private function processOptionsAttributes(array $options)
     {
-        $data = ['error' => 'exception'];
+        $data = [
+            'error' => 'exception',
+            'version' => '0.2'
+        ];
 
         $option_error = ['exception', 'array'];
         if (isset($options['error']) && in_array($options['error'], $option_error)) {
             $data['error'] = $options['error'];
+        }
+
+        $option_version = ['0.1', '0.2'];
+        if (isset($options['version']) && in_array($options['version'], $option_version)) {
+            $data['version'] = $options['version'];
         }
 
         return $data;
@@ -349,5 +357,44 @@ trait UtilityTrait
 
             throw new KevinException('ClientID and ClientSecret are required.');
         }
+    }
+
+    /**
+     * @param $option
+     * @return mixed
+     */
+    private function getOption($option)
+    {
+        return $this->options[$option];
+    }
+
+    /**
+     * @return string
+     */
+    private function getBaseUrl()
+    {
+        $version = $this->getOption('version');
+
+        switch ($version) {
+            case '0.1':
+                $base_url = self::BASE_URL_V01;
+                break;
+            case '0.2':
+                $base_url = self::BASE_URL_V02;
+                break;
+            default:
+                $base_url = self::BASE_URL_V02;
+        }
+
+        return $base_url;
+    }
+
+    /**
+     * @param string $path
+     * @return string
+     */
+    private function getEndpointUrl($path = '')
+    {
+        return $this->getBaseUrl() . $path;
     }
 }

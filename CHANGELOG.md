@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.9.3] - 2021-01-20
+- Added option to choose API version.
+
 ## [0.9.2] - 2021-01-20
 - Added support for `informationStructured` parameter.
 

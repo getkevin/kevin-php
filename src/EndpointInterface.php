@@ -11,24 +11,26 @@ interface EndpointInterface
      * Base URL used for sending API calls.
      */
     const BASE_URL = 'https://api.getkevin.eu/platform';
+    const BASE_URL_V01 = self::BASE_URL . '/v0.1';
+    const BASE_URL_V02 = self::BASE_URL . '/v0.2';
 
     /**
      * List of Auth related endpoints.
      */
 
-    const URL_COUNTRIES = self::BASE_URL . '/auth/countries';
-    const URL_BANKS = self::BASE_URL . '/auth/banks';
-    const URL_BANK = self::BASE_URL . '/auth/banks/{bankId}';
-    const URL_AUTH = self::BASE_URL . '/auth';
-    const URL_RECEIVE_TOKEN = self::BASE_URL . '/auth/token';
-    const URL_REFRESH_TOKEN = self::BASE_URL . '/auth/token';
-    const URL_TOKEN_CONTENT = self::BASE_URL . '/auth/token/content';
+    const PATH_COUNTRIES = '/auth/countries';
+    const PATH_BANKS = '/auth/banks';
+    const PATH_BANK = '/auth/banks/{bankId}';
+    const PATH_AUTH = '/auth';
+    const PATH_RECEIVE_TOKEN = '/auth/token';
+    const PATH_REFRESH_TOKEN = '/auth/token';
+    const PATH_TOKEN_CONTENT = '/auth/token/content';
 
     /**
      * List of Payment related endpoints.
      */
 
-    const URL_INIT_PAYMENT = self::BASE_URL . '/pis/payment';
-    const URL_PAYMENT = self::BASE_URL . '/pis/payment/{paymentId}';
-    const URL_PAYMENT_STATUS = self::BASE_URL . '/pis/payment/{paymentId}/status';
+    const PATH_INIT_PAYMENT = '/pis/payment';
+    const PATH_PAYMENT = '/pis/payment/{paymentId}';
+    const PATH_PAYMENT_STATUS = '/pis/payment/{paymentId}/status';
 }

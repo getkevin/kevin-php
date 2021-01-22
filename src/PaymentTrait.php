@@ -110,6 +110,18 @@ trait PaymentTrait
             $data[] = 'PSU-IP-Address: ' . $attr['PSU-IP-Address'];
         }
 
+        if ($this->getOption('version') == '0.2') {
+            if (isset($attr['PSU-IP-Port'])) {
+                $data[] = 'PSU-IP-Port: ' . $attr['PSU-IP-Port'];
+            }
+            if (isset($attr['PSU-User-Agent'])) {
+                $data[] = 'PSU-User-Agent: ' . $attr['PSU-User-Agent'];
+            }
+            if (isset($attr['PSU-Device-ID'])) {
+                $data[] = 'PSU-Device-ID: ' . $attr['PSU-Device-ID'];
+            }
+        }
+
         return $data;
     }
 
@@ -125,6 +137,18 @@ trait PaymentTrait
 
         if (isset($attr['PSU-IP-Address'])) {
             $data[] = 'PSU-IP-Address: ' . $attr['PSU-IP-Address'];
+        }
+
+        if ($this->getOption('version') == '0.2') {
+            if (isset($attr['PSU-User-Agent'])) {
+                $data[] = 'PSU-User-Agent: ' . $attr['PSU-User-Agent'];
+            }
+            if (isset($attr['PSU-IP-Port'])) {
+                $data[] = 'PSU-IP-Port: ' . $attr['PSU-IP-Port'];
+            }
+            if (isset($attr['PSU-Device-ID'])) {
+                $data[] = 'PSU-Device-ID: ' . $attr['PSU-Device-ID'];
+            }
         }
 
         return $data;

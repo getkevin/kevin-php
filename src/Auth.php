@@ -35,7 +35,7 @@ class Auth implements AuthInterface, EndpointInterface
      */
     public function getCountries()
     {
-        $url = self::URL_COUNTRIES;
+        $url = $this->getEndpointUrl(self::PATH_COUNTRIES);
 
         $data = '';
 
@@ -56,7 +56,7 @@ class Auth implements AuthInterface, EndpointInterface
      */
     public function getBanks($attr = [])
     {
-        $url = self::URL_BANKS;
+        $url = $this->getEndpointUrl(self::PATH_BANKS);
 
         $queryData = $this->getBankQueryAttr($attr);
         if (count($queryData)) {
@@ -85,7 +85,8 @@ class Auth implements AuthInterface, EndpointInterface
     {
         $bankId = $this->escParam($bankId);
 
-        $url = $this->gluePath(self::URL_BANK, $bankId);
+        $url = $this->getEndpointUrl(self::PATH_BANK);
+        $url = $this->gluePath($url, $bankId);
 
         $data = '';
 
@@ -106,7 +107,7 @@ class Auth implements AuthInterface, EndpointInterface
      */
     public function auth($attr = [])
     {
-        $url = self::URL_AUTH;
+        $url = $this->getEndpointUrl(self::PATH_AUTH);
 
         $queryData = $this->getAuthQueryAttr($attr);
         if (count($queryData)) {
@@ -148,7 +149,7 @@ class Auth implements AuthInterface, EndpointInterface
      */
     public function receiveToken($attr = [])
     {
-        $url = self::URL_RECEIVE_TOKEN;
+        $url = $this->getEndpointUrl(self::PATH_RECEIVE_TOKEN);
 
         $jsonData = $this->getReceiveTokenBodyAttr($attr);
         $data = json_encode($jsonData);
@@ -170,7 +171,7 @@ class Auth implements AuthInterface, EndpointInterface
      */
     public function refreshToken($attr = [])
     {
-        $url = self::URL_REFRESH_TOKEN;
+        $url = $this->getEndpointUrl(self::PATH_REFRESH_TOKEN);
 
         $jsonData = $this->getRefreshTokenBodyAttr($attr);
         $data = json_encode($jsonData);
@@ -192,7 +193,7 @@ class Auth implements AuthInterface, EndpointInterface
      */
     public function receiveTokenContent($attr = [])
     {
-        $url = self::URL_TOKEN_CONTENT;
+        $url = $this->getEndpointUrl(self::PATH_TOKEN_CONTENT);
 
         $data = '';
 

@@ -36,7 +36,7 @@ class Payment implements PaymentInterface, EndpointInterface
      */
     public function initPayment($attr = [])
     {
-        $url = self::URL_INIT_PAYMENT;
+        $url = $this->getEndpointUrl(self::PATH_INIT_PAYMENT);
 
         $queryData = $this->getPaymentQueryAttr($attr);
         if (count($queryData)) {
@@ -67,7 +67,8 @@ class Payment implements PaymentInterface, EndpointInterface
     {
         $paymentId = $this->escParam($paymentId);
 
-        $url = $this->gluePath(self::URL_PAYMENT, $paymentId);
+        $url = $this->getEndpointUrl(self::PATH_PAYMENT);
+        $url = $this->gluePath($url, $paymentId);
 
         $data = '';
 
@@ -91,7 +92,8 @@ class Payment implements PaymentInterface, EndpointInterface
     {
         $paymentId = $this->escParam($paymentId);
 
-        $url = $this->gluePath(self::URL_PAYMENT_STATUS, $paymentId);
+        $url = $this->getEndpointUrl(self::PATH_PAYMENT_STATUS);
+        $url = $this->gluePath($url, $paymentId);
 
         $data = '';
 
