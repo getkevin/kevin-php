@@ -37,10 +37,34 @@ trait UtilityTrait
      */
     private function buildHeader()
     {
-        return [
+        $data = [
             'Client-Id: ' . $this->clientId,
-            'Client-Secret: ' . $this->clientSecret
+            'Client-Secret: ' . $this->clientSecret,
         ];
+
+        return array_merge($data, $this->buildPluginInformationHeader());
+    }
+
+    private function buildPluginInformationHeader() {
+        $data = [];
+
+        $pluginVersion = $this->getOption('pluginVersion');
+        $pluginPlatform = $this->getOption('pluginPlatform');
+        $pluginPlatformVersion = $this->getOption('pluginPlatformVersion');
+
+        if (isset($pluginVersion)) {
+            $data[] = 'Plugin-Version: ' . $pluginVersion;
+        }
+
+        if (isset($pluginPlatform)) {
+            $data[] = 'Plugin-Platform: ' . $pluginPlatform;
+        }
+
+        if (isset($pluginPlatformVersion)) {
+            $data[] = 'Plugin-Platform-Version: ' . $pluginPlatformVersion;
+        }
+
+        return $data;
     }
 
     /**
@@ -109,7 +133,6 @@ trait UtilityTrait
         $data = array_merge($default_headers, $header);
         $data[] = "Connection: Close";
         $data[] = ""; // Separator
-
         if ($type === 'POST') {
             $data[] = "$jsonData\r\n";
         }
@@ -130,7 +153,6 @@ trait UtilityTrait
         $result = trim($parts[1]);
 
         $header = explode("\r\n", $header);
-
         $code = -1;
         foreach ($header as $value) {
             if (substr($value, 0, 4) === 'HTTP') {
@@ -246,24 +268,7 @@ trait UtilityTrait
      */
     private function processSchemaAttributes(array $schema, array $attr)
     {
-        $data = [];
-
-        foreach ($schema as $item => $value) {
-            if (is_string($value)) {
-                if (isset($attr[$value])) {
-                    $data[$value] = strval($attr[$value]);
-                }
-            } else if (is_array($value)) {
-                foreach ($value as $sub_value) {
-                    if (isset($attr[$item][$sub_value])) {
-                        $data[$item] = [];
-                        $data[$item][$sub_value] = strval($attr[$item][$sub_value]);
-                    }
-                }
-            }
-        }
-
-        return $data;
+        return $this->intersectArrayRecursively($attr, $schema);
     }
 
     /**
@@ -315,7 +320,7 @@ trait UtilityTrait
     {
         $data = [
             'error' => 'exception',
-            'version' => '0.2'
+            'version' => '0.3'
         ];
 
         $option_error = ['exception', 'array'];
@@ -323,9 +328,19 @@ trait UtilityTrait
             $data['error'] = $options['error'];
         }
 
-        $option_version = ['0.1', '0.2'];
+        $option_version = ['0.1', '0.2', '0.3'];
         if (isset($options['version']) && in_array($options['version'], $option_version)) {
             $data['version'] = $options['version'];
+        }
+
+        if (isset($options['pluginVersion'])) {
+            $data['pluginVersion'] = $options['pluginVersion'];
+        }
+        if (isset($options['pluginPlatform'])) {
+            $data['pluginPlatform'] = $options['pluginPlatform'];
+        }
+        if (isset($options['pluginPlatformVersion'])) {
+            $data['pluginPlatformVersion'] = $options['pluginPlatformVersion'];
         }
 
         return $data;
@@ -382,6 +397,9 @@ trait UtilityTrait
             case '0.2':
                 $base_url = self::BASE_URL_V02;
                 break;
+            case '0.3':
+                $base_url = self::BASE_URL_V03;
+                break;
             default:
                 $base_url = self::BASE_URL_V02;
         }
@@ -396,5 +414,28 @@ trait UtilityTrait
     private function getEndpointUrl($path = '')
     {
         return $this->getBaseUrl() . $path;
+    }
+
+    /**
+     * @param array $master
+     * @param array $mask
+     * @return array
+     */
+    private function intersectArrayRecursively($master, $mask)
+    {
+        if (!is_array($master)) {
+            return $master;
+        }
+
+        foreach ($master as $k => $v) {
+            if (!isset($mask[$k])) {
+                unset ($master[$k]);
+                continue;
+            }
+            if (is_array($mask[$k])) {
+                $master[$k] = $this->intersectArrayRecursively($master[$k], $mask[$k]);
+            }
+        }
+        return $master;
     }
 }

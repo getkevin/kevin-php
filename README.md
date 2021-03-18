@@ -40,7 +40,7 @@ use Kevin\Client;
 
 $clientId = 'my-client-id';
 $clientSecret = 'my-client-secret';
-$options = ['error' => 'array', 'version' => '0.1'];
+$options = ['error' => 'array', 'version' => '0.3'];
 
 $kevinClient = new Client($clientId, $clientSecret, $options);
 ```
@@ -53,7 +53,7 @@ $kevinClient = new Client($clientId, $clientSecret, $options);
 >
 > - `error` - Defines return type of error data. Possible values are: `array` - returns an array on error, `exception` - throws an exception on error, default value is `exception`.
 >
-> - `version` - Selects API versions to use. Default value is `0.2`. Possible values are `0.1` or `0.2`.
+> - `version` - Selects API versions to use. Default value is `0.3`. Possible values are `0.1`, `0.2` or `0.3`.
 
 ### 1. Authentication
 
