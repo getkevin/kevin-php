@@ -116,24 +116,45 @@ $response = $kevinClient->auth()->receiveTokenContent($attr);
 
 ### 2. Payment
 
-### 2.1 Initiate payment
+### 2.1 Initiate bank payment
 
 ```
 $attr = [
     'Redirect-URL' => 'https://redirect.getkevin.eu/payment.html',
-    'endToEndId' => '1',
-    'informationUnstructured' => 'Test',
+    'description' => 'Test',
     'currencyCode' => 'EUR',
     'amount' => '0.01',
-    'creditorName' => 'John Smith',
-    'creditorAccount' => [
-        'iban' => 'LT144010051005081586'
-    ]
+    'bankPaymentMethod' => [
+        'endToEndId' => '1',
+        'creditorName' => 'John Smith',
+        'creditorAccount' => [
+            'iban' => 'LT144010051005081586'
+        ],
+    ],
 ];
 $response = $kevinClient->payment()->initPayment($attr);
 ```
 
-### 2.2 Get payment
+### 2.2 Initiate card payment
+
+```
+$attr = [
+    'Redirect-URL' => 'https://redirect.getkevin.eu/payment.html',
+    'description' => 'Test',
+    'currencyCode' => 'EUR',
+    'amount' => '0.01',
+    'cardPaymentMethod' => [
+        'cvc' => '123',
+        'expMonth' => '01',
+        'expYear' => '2036',
+        'number' => '5555555555555555',
+        'holderName' => 'John Titor',
+    ],
+];
+$response = $kevinClient->payment()->initPayment($attr);
+```
+
+### 2.3 Get payment
 
 ```
 $paymentId = 'your-payment-id';
@@ -141,7 +162,7 @@ $attr = ['PSU-IP-Address' => 'user-ip-address'];
 $response = $kevinClient->payment()->getPayment($paymentId, $attr);
 ```
 
-### 2.3 Get payment status
+### 2.4 Get payment status
 
 ```
 $paymentId = 'your-payment-id';
