@@ -116,7 +116,8 @@ class Auth implements AuthInterface, EndpointInterface
         }
 
         $jsonData = $this->getAuthBodyAttr($attr);
-        $data = json_encode($jsonData);
+
+        $data = json_encode($jsonData, JSON_FORCE_OBJECT);
 
         $header = array_merge($this->getAuthHeaderAttr($attr), $this->buildJsonHeader($data));
 
