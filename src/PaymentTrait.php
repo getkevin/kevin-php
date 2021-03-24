@@ -41,28 +41,46 @@ trait PaymentTrait
     private function getInitPaymentBodyAttr($attr)
     {
         $schema = [
-            'creditorName',
+            'creditorName' => '',
             'creditorAccount' => [
-                'iban',
-                'bban',
-                'sortCodeAccountNumber'
+                'iban' => '',
+                'bban' => '',
+                'sortCodeAccountNumber' => '',
             ],
             'debtorAccount' => [
-                'iban',
-                'bban',
-                'sortCodeAccountNumber'
+                'iban' => '',
+                'bban' => '',
+                'sortCodeAccountNumber' => '',
             ],
-            'amount',
-            'currencyCode',
-            'endToEndId',
-            'informationUnstructured',
+            'bankPaymentMethod' => [
+                'creditorName' => '',
+                'endToEndId' => '',
+                'informationStructured' => [
+                    'reference' => '',
+                ],
+                'creditorAccount' => [
+                    'iban' => '',
+                ]
+            ],
+            'cardPaymentMethod' => [
+                'cvc' => '',
+                'expMonth' => '',
+                'expYear' => '',
+                'number' => '',
+                'holderName' => '',
+            ],
+            'amount' => '',
+            'currencyCode' => '',
+            'description' => '',
+            'endToEndId' => '',
+            'informationUnstructured' => '',
             'informationStructured' => [
-                'reference',
-                'referenceType'
+                'reference' => '',
+                'referenceType' => '',
             ],
-            'requestedExecutionDate',
+            'requestedExecutionDate' => '',
             'identifier' => [
-                'email'
+                'email' => '',
             ]
         ];
 
@@ -77,12 +95,13 @@ trait PaymentTrait
      */
     private function getInitPaymentHeaderAttr($attr = [])
     {
-        $data = [];
-
         if (isset($attr['Authorization'])) {
-            $data[] = 'Authorization: ' . $this->unifyBearerToken($attr['Authorization']);
+            $data = array_merge(
+                ['Authorization: ' . $this->unifyBearerToken($attr['Authorization'])],
+                $this->buildPluginInformationHeader()
+            );
         } else {
-            $data = array_merge($this->buildHeader(), $data);
+            $data = $this->buildHeader();
         }
 
         if (isset($attr['Redirect-URL'])) {
@@ -110,7 +129,7 @@ trait PaymentTrait
             $data[] = 'PSU-IP-Address: ' . $attr['PSU-IP-Address'];
         }
 
-        if ($this->getOption('version') == '0.2') {
+        if (in_array($this->getOption('version'), ['0.2', '0.3'])) {
             if (isset($attr['PSU-IP-Port'])) {
                 $data[] = 'PSU-IP-Port: ' . $attr['PSU-IP-Port'];
             }
@@ -139,7 +158,7 @@ trait PaymentTrait
             $data[] = 'PSU-IP-Address: ' . $attr['PSU-IP-Address'];
         }
 
-        if ($this->getOption('version') == '0.2') {
+        if (in_array($this->getOption('version'), ['0.2', '0.3'])) {
             if (isset($attr['PSU-User-Agent'])) {
                 $data[] = 'PSU-User-Agent: ' . $attr['PSU-User-Agent'];
             }

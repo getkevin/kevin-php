@@ -40,7 +40,7 @@ use Kevin\Client;
 
 $clientId = 'my-client-id';
 $clientSecret = 'my-client-secret';
-$options = ['error' => 'array', 'version' => '0.1'];
+$options = ['error' => 'array', 'version' => '0.3'];
 
 $kevinClient = new Client($clientId, $clientSecret, $options);
 ```
@@ -53,7 +53,7 @@ $kevinClient = new Client($clientId, $clientSecret, $options);
 >
 > - `error` - Defines return type of error data. Possible values are: `array` - returns an array on error, `exception` - throws an exception on error, default value is `exception`.
 >
-> - `version` - Selects API versions to use. Default value is `0.2`. Possible values are `0.1` or `0.2`.
+> - `version` - Selects API versions to use. Default value is `0.3`. Possible values are `0.1`, `0.2` or `0.3`.
 
 ### 1. Authentication
 
@@ -116,24 +116,45 @@ $response = $kevinClient->auth()->receiveTokenContent($attr);
 
 ### 2. Payment
 
-### 2.1 Initiate payment
+### 2.1 Initiate bank payment
 
 ```
 $attr = [
     'Redirect-URL' => 'https://redirect.getkevin.eu/payment.html',
-    'endToEndId' => '1',
-    'informationUnstructured' => 'Test',
+    'description' => 'Test',
     'currencyCode' => 'EUR',
     'amount' => '0.01',
-    'creditorName' => 'John Smith',
-    'creditorAccount' => [
-        'iban' => 'LT144010051005081586'
-    ]
+    'bankPaymentMethod' => [
+        'endToEndId' => '1',
+        'creditorName' => 'John Smith',
+        'creditorAccount' => [
+            'iban' => 'LT144010051005081586'
+        ],
+    ],
 ];
 $response = $kevinClient->payment()->initPayment($attr);
 ```
 
-### 2.2 Get payment
+### 2.2 Initiate card payment
+
+```
+$attr = [
+    'Redirect-URL' => 'https://redirect.getkevin.eu/payment.html',
+    'description' => 'Test',
+    'currencyCode' => 'EUR',
+    'amount' => '0.01',
+    'cardPaymentMethod' => [
+        'cvc' => '123',
+        'expMonth' => '01',
+        'expYear' => '2036',
+        'number' => '5555555555555555',
+        'holderName' => 'John Titor',
+    ],
+];
+$response = $kevinClient->payment()->initPayment($attr);
+```
+
+### 2.3 Get payment
 
 ```
 $paymentId = 'your-payment-id';
@@ -141,7 +162,7 @@ $attr = ['PSU-IP-Address' => 'user-ip-address'];
 $response = $kevinClient->payment()->getPayment($paymentId, $attr);
 ```
 
-### 2.3 Get payment status
+### 2.4 Get payment status
 
 ```
 $paymentId = 'your-payment-id';
