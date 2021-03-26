@@ -34,4 +34,6 @@ interface EndpointInterface
     const PATH_INIT_PAYMENT = '/pis/payment';
     const PATH_PAYMENT = '/pis/payment/{paymentId}';
     const PATH_PAYMENT_STATUS = '/pis/payment/{paymentId}/status';
+    const PATH_INITIATE_PAYMENT_REFUND = '/pis/payment/{paymentId}/refunds';
+    const PATH_GET_PAYMENT_REFUNDS = '/pis/payment/{paymentId}/refunds';
 }

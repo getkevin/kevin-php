@@ -83,7 +83,7 @@ class Payment implements PaymentInterface, EndpointInterface
      * API Method: Get payment status
      * @see https://docs.getkevin.eu/public/platform/v0.1#operation/getPaymentStatus
      *
-     * @param $paymentId
+     * @param string $paymentId
      * @param array $attr
      * @return array
      * @throws KevinException
@@ -98,6 +98,57 @@ class Payment implements PaymentInterface, EndpointInterface
         $data = '';
 
         $header = array_merge($this->getPaymentStatusHeaderAttr($attr), $this->buildJsonHeader($data));
+
+        $response = $this->buildRequest($url, 'GET', $data, $header);
+
+        return $this->buildResponse($response);
+    }
+
+    /**
+     * API Method: Initiate payment refund
+     * @see https://docs.getkevin.eu/public/platform/v0.3#operation/initiatePaymentRefund
+     *
+     * @param string $paymentId
+     * @param array $attr
+     * @return array
+     * @throws KevinException
+     */
+    public function initiatePaymentRefund($paymentId, $attr = [])
+    {
+        $paymentId = $this->escParam($paymentId);
+
+        $url = $this->getEndpointUrl(self::PATH_INITIATE_PAYMENT_REFUND);
+        $url = $this->gluePath($url, $paymentId);
+
+        $jsonData = $this->getInitPaymentRefundAttr($attr);
+        $data = json_encode($jsonData);
+
+        $header = array_merge($this->getInitiatePaymentRefundHeaderAttr($attr), $this->buildJsonHeader($data));
+
+        $response = $this->buildRequest($url, 'POST', $data, $header);
+
+        return $this->buildResponse($response);
+    }
+
+    /**
+     * API Method: Get payment refunds
+     * @see https://docs.getkevin.eu/public/platform/v0.3#operation/getPaymentRefunds
+     *
+     * @param string $paymentId
+     * @param array $attr
+     * @return array
+     * @throws KevinException
+     */
+    public function getPaymentRefunds($paymentId)
+    {
+        $paymentId = $this->escParam($paymentId);
+
+        $url = $this->getEndpointUrl(self::PATH_GET_PAYMENT_REFUNDS);
+        $url = $this->gluePath($url, $paymentId);
+
+        $data = '';
+
+        $header = array_merge($this->buildHeader(), $this->buildJsonHeader($data));
 
         $response = $this->buildRequest($url, 'GET', $data, $header);
 

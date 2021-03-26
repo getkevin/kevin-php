@@ -170,6 +170,24 @@ $attr = ['PSU-IP-Address' => 'user-ip-address'];
 $response = $kevinClient->payment()->getPaymentStatus($paymentId, $attr);
 ```
 
+### 2.5 Initiate payment refund
+
+```
+$paymentId = 'your-payment-id';
+$attr = [
+    'amount' => '1.00',
+    'Webhook-URL' => 'https://yourapp.com/notify'
+];
+$response = $kevinClient->payment()->initiatePaymentRefund($paymentId, $attr);
+```
+
+### 2.6 Get payment refunds
+
+```
+$paymentId = 'your-payment-id';
+$response = $kevinClient->payment()->getPaymentRefunds($paymentId);
+```
+
 ## Support
 
 Email: support@getkevin.eu

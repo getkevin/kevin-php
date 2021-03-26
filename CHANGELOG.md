@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.11.0] - 2021-03-19
+- Added support for initiating and getting payment refunds
+
 ## [0.10.0] - 2021-03-19
 - Added API v0.3 support
 - Added support for specifying plugin integration information

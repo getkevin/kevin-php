@@ -88,6 +88,21 @@ trait PaymentTrait
     }
 
     /**
+     * Extract body attributes used for init payment refund action.
+     *
+     * @param array $attr
+     * @return array
+     */
+    private function getInitPaymentRefundAttr($attr)
+    {
+        $schema = [
+            'amount' => '',
+        ];
+
+        return $this->processSchemaAttributes($schema, $attr);
+    }
+
+    /**
      * Extract header attributes used for payment action.
      *
      * @param array $attr
@@ -168,6 +183,23 @@ trait PaymentTrait
             if (isset($attr['PSU-Device-ID'])) {
                 $data[] = 'PSU-Device-ID: ' . $attr['PSU-Device-ID'];
             }
+        }
+
+        return $data;
+    }
+
+    /**
+     * Extract header attributes used for init payment refund action.
+     *
+     * @param array $attr
+     * @return array
+     */
+    private function getInitiatePaymentRefundHeaderAttr($attr = [])
+    {
+        $data = $this->buildHeader();
+
+        if (isset($attr['Webhook-URL'])) {
+            $data[] = 'Webhook-URL: ' . $attr['Webhook-URL'];
         }
 
         return $data;
