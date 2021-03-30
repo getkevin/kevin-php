@@ -98,6 +98,49 @@ class Auth implements AuthInterface, EndpointInterface
     }
 
     /**
+     * API Method: Get supported bank by card number piece.
+     * @see: https://docs.getkevin.eu/public/platform/v0.3#operation/getBankByCardNumberPiece
+     *
+     * @param string $cardNumberPiece
+     * @return array
+     * @throws KevinException
+     */
+    public function getBankByCardNumberPiece($cardNumberPiece)
+    {
+        $cardNumberPiece = $this->escParam($cardNumberPiece);
+
+        $url = $this->getEndpointUrl(self::PATH_BANK_BY_CARD_NUMBER_PIECE);
+        $url = $this->gluePath($url, $cardNumberPiece);
+
+        $data = '';
+
+        $header = array_merge($this->buildHeader(), $this->buildJsonHeader($data));
+
+        $response = $this->buildRequest($url, 'GET', $data, $header);
+
+        return $this->buildResponse($response);
+    }
+
+    /**
+     * API Method: Get supported payment methods.
+     * @see https://docs.getkevin.eu/public/platform/v0.3#operation/getPaymentMethods
+     *
+     * @return array
+     * @throws KevinException
+     */
+    public function getPaymentMethods()
+    {
+        $url = $this->getEndpointUrl(self::PATH_PAYMENT_METHODS);
+
+        $data = '';
+        $header = array_merge($this->buildHeader(), $this->buildJsonHeader($data));
+
+        $response = $this->buildRequest($url, 'GET', $data, $header);
+
+        return $this->buildResponse($response);
+    }
+
+    /**
      * API Method: Start authentication.
      * @see https://docs.getkevin.eu/public/platform/v0.1#operation/startAuth
      *

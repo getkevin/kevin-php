@@ -1,7 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.11.0] - 2021-03-19
+## [0.12.0] - 2021-03-30
+- Added support for getting payment methods
+- Added support for getting bank by card number piece
+
+## [0.11.0] - 2021-03-26
 - Added support for initiating and getting payment refunds
 
 ## [0.10.0] - 2021-03-19
