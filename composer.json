@@ -6,11 +6,11 @@
     "authors": [
         {
             "name": "kevin.",
-            "email": "support@getkevin.eu"
+            "email": "help@kevin.eu"
         }
     ],
     "support": {
-        "email": "support@getkevin.eu"
+        "email": "help@kevin.eu"
     },
     "require": {
         "php": ">=5.6",
