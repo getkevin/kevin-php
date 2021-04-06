@@ -2,16 +2,15 @@
     "name": "getkevin/kevin-php",
     "description": "PHP client for kevin. platform.",
     "type": "library",
-    "version": "0.9.3",
     "license": "MIT",
     "authors": [
         {
-            "name": "Tammi",
-            "email": "info@tammi.lt"
+            "name": "kevin.",
+            "email": "help@kevin.eu"
         }
     ],
     "support": {
-        "email": "support@getkevin.eu"
+        "email": "help@kevin.eu"
     },
     "require": {
         "php": ">=5.6",
