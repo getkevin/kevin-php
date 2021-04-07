@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.13.1] - 2021-04-07
+- Fixes an undefined index error in getOption method
+
+## [0.13.0] - 2021-04-06
+- composer.json author change
+
 ## [0.12.0] - 2021-03-30
 - Added support for getting payment methods
 - Added support for getting bank by card number piece
