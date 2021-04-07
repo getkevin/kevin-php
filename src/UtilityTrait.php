@@ -52,15 +52,15 @@ trait UtilityTrait
         $pluginPlatform = $this->getOption('pluginPlatform');
         $pluginPlatformVersion = $this->getOption('pluginPlatformVersion');
 
-        if (isset($pluginVersion)) {
+        if ($pluginVersion !== null) {
             $data[] = 'Plugin-Version: ' . $pluginVersion;
         }
 
-        if (isset($pluginPlatform)) {
+        if ($pluginPlatform !== null) {
             $data[] = 'Plugin-Platform: ' . $pluginPlatform;
         }
 
-        if (isset($pluginPlatformVersion)) {
+        if ($pluginPlatformVersion !== null) {
             $data[] = 'Plugin-Platform-Version: ' . $pluginPlatformVersion;
         }
 
@@ -375,12 +375,12 @@ trait UtilityTrait
     }
 
     /**
-     * @param $option
-     * @return mixed
+     * @param string $option
+     * @return mixed|null
      */
     private function getOption($option)
     {
-        return $this->options[$option];
+        return isset($this->options[$option]) ? $this->options[$option] : null;
     }
 
     /**
