@@ -158,16 +158,14 @@ $response = $kevinClient->payment()->initPayment($attr);
 
 ```
 $paymentId = 'your-payment-id';
-$attr = ['PSU-IP-Address' => 'user-ip-address'];
-$response = $kevinClient->payment()->getPayment($paymentId, $attr);
+$response = $kevinClient->payment()->getPayment($paymentId);
 ```
 
 ### 2.4 Get payment status
 
 ```
 $paymentId = 'your-payment-id';
-$attr = ['PSU-IP-Address' => 'user-ip-address'];
-$response = $kevinClient->payment()->getPaymentStatus($paymentId, $attr);
+$response = $kevinClient->payment()->getPaymentStatus($paymentId);
 ```
 
 ### 2.5 Initiate payment refund
