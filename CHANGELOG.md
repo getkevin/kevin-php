@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.13.2] - 2021-04-14
+- Updated documentation
+
 ## [0.13.1] - 2021-04-07
 - Fixes an undefined index error in getOption method
 
