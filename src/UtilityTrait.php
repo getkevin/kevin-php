@@ -198,8 +198,9 @@ trait UtilityTrait
 
         if ($is_error) {
             $error = $response['error'];
+            $data = isset($response['data']) ? $response['data'] : null;
 
-            return $this->returnFailure($error['description'], $error['code'], $error['name']);
+            return $this->returnFailure($error['description'], $error['code'], $error['name'], $data);
         }
 
         return $response;
@@ -277,22 +278,18 @@ trait UtilityTrait
      * @param string $message
      * @param int $code
      * @param string $name
+     * @param string|null $data
      * @return array[]
      * @throws KevinException
      */
-    private function returnFailure($message = '', $code = -1, $name = 'Exception')
+    private function returnFailure($message = '', $code = -1, $name = 'Exception', $data = [])
     {
         switch ($this->options['error']) {
-            case 'exception':
-                throw new KevinException($message, $code);
-
-                break;
             case 'array':
-                $response = ['error' => ['code' => $code, 'name' => $name, 'description' => $message], 'data' => []];
-
+                $response = ['error' => ['code' => $code, 'name' => $name, 'description' => $message], 'data' => $data];
                 break;
             default:
-                throw new KevinException($message, $code);
+                throw new KevinException($message, $code, null, $data);
         }
 
         return $response;
