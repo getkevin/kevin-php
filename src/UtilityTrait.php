@@ -282,7 +282,7 @@ trait UtilityTrait
      * @return array[]
      * @throws KevinException
      */
-    private function returnFailure($message = '', $code = -1, $name = 'Exception', $data = [])
+    private function returnFailure($message = '', $code = -1, $name = 'Exception', $data = null)
     {
         switch ($this->options['error']) {
             case 'array':
