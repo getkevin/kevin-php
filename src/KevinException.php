@@ -12,15 +12,30 @@ use Exception;
 class KevinException extends Exception
 {
     /**
+     * @var string|null
+     */
+    private $data;
+
+    /**
      * KevinException constructor.
      *
-     * @param $message
+     * @param string $message
      * @param int $code
      * @param null $previous
+     * @param string|null $data
      */
-    public function __construct($message, $code = 0, $previous = null)
+    public function __construct($message, $code = 0, $previous = null, $data = null)
     {
+        $this->data = $data;
         parent::__construct($message, $code, $previous);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 
     /**

@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.13.3] - 2021-04-15
+- Support for data property in unsuccessful responses
+
 ## [0.13.2] - 2021-04-14
 - Updated documentation
 
