@@ -45,7 +45,7 @@ class Payment implements PaymentInterface, EndpointInterface
         }
 
         $jsonData = $this->getInitPaymentBodyAttr($attr);
-        $data = json_encode($jsonData);
+        $data = json_encode($jsonData, JSON_FORCE_OBJECT);
 
         $header = array_merge($this->getInitPaymentHeaderAttr($attr), $this->buildJsonHeader($data));
 

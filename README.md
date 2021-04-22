@@ -154,21 +154,41 @@ $attr = [
 $response = $kevinClient->payment()->initPayment($attr);
 ```
 
-### 2.3 Get payment
+### 2.3 Initiate hybrid payment
+
+```
+$attr = [
+    'Redirect-URL' => 'https://redirect.getkevin.eu/payment.html',
+    'description' => 'Test',
+    'currencyCode' => 'EUR',
+    'amount' => '0.01',
+    'bankPaymentMethod' => [
+        'endToEndId' => '1',
+        'creditorName' => 'John Smith',
+        'creditorAccount' => [
+            'iban' => 'LT144010051005081586'
+        ],
+    ],
+    'cardPaymentMethod' => [],
+];
+$response = $kevinClient->payment()->initPayment($attr);
+```
+
+### 2.4 Get payment
 
 ```
 $paymentId = 'your-payment-id';
 $response = $kevinClient->payment()->getPayment($paymentId);
 ```
 
-### 2.4 Get payment status
+### 2.5 Get payment status
 
 ```
 $paymentId = 'your-payment-id';
 $response = $kevinClient->payment()->getPaymentStatus($paymentId);
 ```
 
-### 2.5 Initiate payment refund
+### 2.6 Initiate payment refund
 
 ```
 $paymentId = 'your-payment-id';
@@ -179,7 +199,7 @@ $attr = [
 $response = $kevinClient->payment()->initiatePaymentRefund($paymentId, $attr);
 ```
 
-### 2.6 Get payment refunds
+### 2.7 Get payment refunds
 
 ```
 $paymentId = 'your-payment-id';
