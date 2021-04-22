@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.14.0] - 2021-04-22
+- Added support for hybrid payments
+
 ## [0.13.3] - 2021-04-15
 - Support for data property in unsuccessful responses
 
