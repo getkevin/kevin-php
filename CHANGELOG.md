@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.14.1] - 2021-04-28
+- Added query parameter paymentMethodPreferred to init payment endpoint
+
 ## [0.14.0] - 2021-04-22
 - Added support for hybrid payments
 
