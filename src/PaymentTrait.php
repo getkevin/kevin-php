@@ -29,6 +29,10 @@ trait PaymentTrait
             $data['redirectPreferred'] = boolval(filter_var($attr['redirectPreferred'], FILTER_VALIDATE_BOOLEAN)) ? 'true' : 'false';
         }
 
+        if (isset($attr['paymentMethodPreferred'])) {
+            $data['paymentMethodPreferred'] = strval($attr['paymentMethodPreferred']);
+        }
+
         return $data;
     }
 
