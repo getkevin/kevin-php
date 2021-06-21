@@ -193,6 +193,9 @@ trait UtilityTrait
             case 500:
                 $response = ['error' => ['code' => 500, 'name' => 'Exception', 'description' => 'Internal server error.'], 'data' => []];
                 break;
+            case 502:
+                $response = ['error' => ['code' => 502, 'name' => 'Exception', 'description' => 'Bad Gateway.'], 'data' => []];
+                break;
             case 503:
                 $response = ['error' => ['code' => 503, 'name' => 'Exception', 'description' => 'Service unavailable.'], 'data' => []];
                 break;
