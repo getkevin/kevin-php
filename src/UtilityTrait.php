@@ -177,6 +177,8 @@ trait UtilityTrait
      */
     private function buildResponse($response)
     {
+        $is_error = true;
+
         switch ($response['code']) {
             case 200:
                 $response = json_decode($response['data'], true);
@@ -184,16 +186,25 @@ trait UtilityTrait
                 break;
             case 400:
                 $response = json_decode($response['data'], true);
-                $is_error = true;
                 break;
             case 401:
-                $response = ['error' => ['code' => -1, 'name' => 'Unauthorized', 'description' => 'Unauthorized'], 'data' => []];
-                $is_error = true;
+                $response = ['error' => ['code' => 401, 'name' => 'Unauthorized', 'description' => 'Unauthorized'], 'data' => []];
+                break;
+            case 500:
+                $response = ['error' => ['code' => 500, 'name' => 'Exception', 'description' => 'Internal server error.'], 'data' => []];
+                break;
+            case 502:
+                $response = ['error' => ['code' => 502, 'name' => 'Exception', 'description' => 'Bad Gateway.'], 'data' => []];
+                break;
+            case 503:
+                $response = ['error' => ['code' => 503, 'name' => 'Exception', 'description' => 'Service unavailable.'], 'data' => []];
+                break;
+            case 504:
+                $response = ['error' => ['code' => 504, 'name' => 'Exception', 'description' => 'Gateway timeout.'], 'data' => []];
                 break;
             default:
                 // Should not happen
                 $response = ['error' => ['code' => -1, 'name' => 'Exception', 'description' => 'Unknown error.'], 'data' => []];
-                $is_error = true;
         }
 
         if ($is_error) {

@@ -118,6 +118,8 @@ $response = $kevinClient->auth()->receiveTokenContent($attr);
 
 ### 2.1 Initiate bank payment
 
+:exclamation: _Take a note that the example below is for the v0.3 only. The v0.1 and v0.2 requires a slightly different body._
+
 ```
 $attr = [
     'Redirect-URL' => 'https://redirect.getkevin.eu/payment.html',
@@ -208,7 +210,7 @@ $response = $kevinClient->payment()->getPaymentRefunds($paymentId);
 
 ## Support
 
-Email: support@getkevin.eu
+Email: help@kevin.eu
 
 ## License
 
