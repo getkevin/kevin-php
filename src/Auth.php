@@ -28,7 +28,7 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Get supported countries.
-     * @see https://docs.getkevin.eu/public/platform/v0.1#operation/getCountries
+     * @see https://docs.kevin.eu/public/platform/v0.3#operation/getCountries
      *
      * @return array
      * @throws KevinException
@@ -48,7 +48,7 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Get supported banks.
-     * @see https://docs.getkevin.eu/public/platform/v0.1#operation/getBanks
+     * @see https://docs.kevin.eu/public/platform/v0.3#operation/getBanks
      *
      * @param array $attr
      * @return array
@@ -75,7 +75,7 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Get supported bank.
-     * @see: https://docs.getkevin.eu/public/platform/v0.1#operation/getBank
+     * @see: https://docs.kevin.eu/public/platform/v0.3#operation/getBank
      *
      * @param string $bankId
      * @return array
@@ -99,7 +99,7 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Get supported bank by card number piece.
-     * @see: https://docs.getkevin.eu/public/platform/v0.3#operation/getBankByCardNumberPiece
+     * @see: https://docs.kevin.eu/public/platform/v0.3#operation/getBankByCardNumberPiece
      *
      * @param string $cardNumberPiece
      * @return array
@@ -123,7 +123,7 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Get supported payment methods.
-     * @see https://docs.getkevin.eu/public/platform/v0.3#operation/getPaymentMethods
+     * @see https://docs.kevin.eu/public/platform/v0.3#operation/getPaymentMethods
      *
      * @return array
      * @throws KevinException
@@ -142,7 +142,7 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Start authentication.
-     * @see https://docs.getkevin.eu/public/platform/v0.1#operation/startAuth
+     * @see https://docs.kevin.eu/public/platform/v0.3#operation/startAuth
      *
      * @param array $attr
      * @return array
@@ -185,7 +185,7 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Receive token.
-     * @see https://docs.getkevin.eu/public/platform/v0.1#operation/receiveToken
+     * @see https://docs.kevin.eu/public/platform/v0.3#operation/receiveToken
      *
      * @param array $attr
      * @return array|string
@@ -207,7 +207,7 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Refresh token.
-     * @see https://docs.getkevin.eu/public/platform/v0.1#operation/receiveToken
+     * @see https://docs.kevin.eu/public/platform/v0.3#operation/receiveToken
      *
      * @param array $attr
      * @return array|string
@@ -229,7 +229,7 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Receive token content.
-     * @see https://docs.getkevin.eu/public/platform/v0.1#operation/receiveTokenContent
+     * @see https://docs.kevin.eu/public/platform/v0.3#operation/receiveTokenContent
      *
      * @param array $attr
      * @return array|string

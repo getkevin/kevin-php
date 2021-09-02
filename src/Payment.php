@@ -28,7 +28,7 @@ class Payment implements PaymentInterface, EndpointInterface
 
     /**
      * API Method: Initiate payment.
-     * @see https://docs.getkevin.eu/public/platform/v0.1#operation/initiatePayment
+     * @see https://docs.kevin.eu/public/platform/v0.3#operation/initiatePayment
      *
      * @param array $attr
      * @return array
@@ -56,7 +56,7 @@ class Payment implements PaymentInterface, EndpointInterface
 
     /**
      * API Method: Get payment.
-     * @see https://docs.getkevin.eu/public/platform/v0.1#operation/getPayment
+     * @see https://docs.kevin.eu/public/platform/v0.3#operation/getPayment
      *
      * @param $paymentId
      * @param array $attr
@@ -81,7 +81,7 @@ class Payment implements PaymentInterface, EndpointInterface
 
     /**
      * API Method: Get payment status
-     * @see https://docs.getkevin.eu/public/platform/v0.1#operation/getPaymentStatus
+     * @see https://docs.kevin.eu/public/platform/v0.3#operation/getPaymentStatus
      *
      * @param string $paymentId
      * @param array $attr
@@ -106,7 +106,7 @@ class Payment implements PaymentInterface, EndpointInterface
 
     /**
      * API Method: Initiate payment refund
-     * @see https://docs.getkevin.eu/public/platform/v0.3#operation/initiatePaymentRefund
+     * @see https://docs.kevin.eu/public/platform/v0.3#operation/initiatePaymentRefund
      *
      * @param string $paymentId
      * @param array $attr
@@ -132,7 +132,7 @@ class Payment implements PaymentInterface, EndpointInterface
 
     /**
      * API Method: Get payment refunds
-     * @see https://docs.getkevin.eu/public/platform/v0.3#operation/getPaymentRefunds
+     * @see https://docs.kevin.eu/public/platform/v0.3#operation/getPaymentRefunds
      *
      * @param string $paymentId
      * @param array $attr

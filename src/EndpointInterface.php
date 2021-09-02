@@ -10,7 +10,7 @@ interface EndpointInterface
     /**
      * Base URL used for sending API calls.
      */
-    const BASE_URL = 'https://api.getkevin.eu/platform';
+    const BASE_URL = 'https://api.kevin.eu/platform';
     const BASE_URL_V01 = self::BASE_URL . '/v0.1';
     const BASE_URL_V02 = self::BASE_URL . '/v0.2';
     const BASE_URL_V03 = self::BASE_URL . '/v0.3';
