@@ -114,13 +114,13 @@ trait PaymentTrait
      */
     private function getInitPaymentHeaderAttr($attr = [])
     {
+        $data = $this->buildHeader();
+
         if (isset($attr['Authorization'])) {
             $data = array_merge(
-                ['Authorization: ' . $this->unifyBearerToken($attr['Authorization'])],
-                $this->buildPluginInformationHeader()
+                $data,
+                ['Authorization: ' . $this->unifyBearerToken($attr['Authorization'])]
             );
-        } else {
-            $data = $this->buildHeader();
         }
 
         if (isset($attr['Redirect-URL'])) {
