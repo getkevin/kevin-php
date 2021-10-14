@@ -446,4 +446,21 @@ trait UtilityTrait
         }
         return $master;
     }
+
+    /**
+     * An implementation of kevin.'s signature.
+     * @see https://docs.kevin.eu/public/platform/v0.3#tag/Signature
+     *
+     * @param string $requestBody
+     * @param string $timestamp X-Kevin-Timestamp header value.
+     * @param string $webhookUrl
+     * @param string $endpointSecret
+     * @return string
+     */
+    public function createSignature($requestBody, $timestamp, $webhookUrl, $endpointSecret)
+    {
+        $data = 'POST' . $webhookUrl . $timestamp . $requestBody;
+
+        return hash_hmac('sha256', $data, $endpointSecret);
+    }
 }
