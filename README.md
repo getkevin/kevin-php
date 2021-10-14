@@ -214,6 +214,21 @@ $paymentId = 'your-payment-id';
 $response = $kevinClient->payment()->getPaymentRefunds($paymentId);
 ```
 
+### 3. Security
+
+### 3.1 Create signature
+
+```
+use Kevin\UtilityTrait;
+
+$requestBody = '{"id":"e4dd60bb-574f-4a13-910a-57c9795d905f","status":"ACSC","statusGroup":"completed","type":"PAYMENT"}';
+$webhookUrl = 'https://yourapp.com/notify';
+$timestamp = '1600000000000';
+$endpointSecret = 'SECRET';
+
+$signature = $this->createSignature($requestBody, $timestamp, $webhookUrl, $endpointSecret);
+```
+
 ## Support
 
 Email: help@kevin.eu
