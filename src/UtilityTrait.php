@@ -457,7 +457,7 @@ trait UtilityTrait
      * @param string $endpointSecret
      * @return string
      */
-    public function createSignature($requestBody, $timestamp, $webhookUrl, $endpointSecret)
+    public static function createSignature($requestBody, $timestamp, $webhookUrl, $endpointSecret)
     {
         $data = 'POST' . $webhookUrl . $timestamp . $requestBody;
 
