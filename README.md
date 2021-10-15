@@ -77,7 +77,13 @@ $bankId = 'SEB_LT_SAND';
 $response = $kevinClient->auth()->getBank($bankId);
 ```
 
-### 1.4 Start authentication
+### 1.4 Get project settings
+
+```
+$response = $kevinClient->auth()->getProjectSettings();
+```
+
+### 1.5 Start authentication
 
 ```
 $attr = [
@@ -89,7 +95,7 @@ $attr = [
 $response = $kevinClient->auth()->authenticate($attr);
 ```
 
-### 1.5 Receive token
+### 1.6 Receive token
 
 ```
 $attr = ['code' => 'your-auth-code'];
@@ -97,7 +103,7 @@ $attr = ['code' => 'your-auth-code'];
 $response = $kevinClient->auth()->receiveToken($attr);
 ```
 
-### 1.6 Refresh token
+### 1.7 Refresh token
 
 ```
 $attr = ['refreshToken' => 'your-refresh-token'];
@@ -105,7 +111,7 @@ $attr = ['refreshToken' => 'your-refresh-token'];
 $response = $kevinClient->auth()->refreshToken($attr);
 ```
 
-### 1.7 Receive token content
+### 1.8 Receive token content
 
 ```
 $attr = ['Authorization' => 'your-bearer-token'];
@@ -206,6 +212,21 @@ $response = $kevinClient->payment()->initiatePaymentRefund($paymentId, $attr);
 ```
 $paymentId = 'your-payment-id';
 $response = $kevinClient->payment()->getPaymentRefunds($paymentId);
+```
+
+### 3. Security
+
+### 3.1 Create signature
+
+```
+use Kevin\UtilityTrait;
+
+$requestBody = '{"id":"e4dd60bb-574f-4a13-910a-57c9795d905f","status":"ACSC","statusGroup":"completed","type":"PAYMENT"}';
+$webhookUrl = 'https://yourapp.com/notify';
+$timestamp = '1600000000000';
+$endpointSecret = 'SECRET';
+
+$signature = $this->createSignature($requestBody, $timestamp, $webhookUrl, $endpointSecret);
 ```
 
 ## Support
