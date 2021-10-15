@@ -216,17 +216,21 @@ $response = $kevinClient->payment()->getPaymentRefunds($paymentId);
 
 ### 3. Security
 
-### 3.1 Create signature
+### 3.1 Verify signature
+
+:exclamation: _We recommend ignoring the webhook if the signature is older than 5 minutes._
 
 ```
-use Kevin\UtilityTrait;
+use Kevin\SecurityManager;
 
-$requestBody = '{"id":"e4dd60bb-574f-4a13-910a-57c9795d905f","status":"ACSC","statusGroup":"completed","type":"PAYMENT"}';
-$webhookUrl = 'https://yourapp.com/notify';
-$timestamp = '1600000000000';
-$endpointSecret = 'SECRET';
+$endpointSecret = 'your-endpoint-secret';
+$securityManager = new SecurityManager($endpointSecret);
 
-$signature = $this->createSignature($requestBody, $timestamp, $webhookUrl, $endpointSecret);
+$webhookUrl = 'your-webhook-url';
+$timestampTimeout = 300000;
+$requestBody = file_get_contents("php://input");
+
+$isValid = $securityManager->verifySignature($requestBody, getallheaders(), $webhookUrl, $timestampTimeout);
 ```
 
 ## Support
