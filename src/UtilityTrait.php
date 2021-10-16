@@ -463,21 +463,18 @@ trait UtilityTrait
      */
     function appendQueryParam(&$url, $varName, $value)
     {
-        if(!isset($varName) || !isset($value) ) {
+        if (!isset($varName) || !isset($value)) {
             return;
         }
 
-        if (strpos($url, '?'))
-        {
+        if (strpos($url, '?')) {
             $url .= "&" . $varName . "=" . $value;
-        }
-        else
-        {
+        } else {
             $url .= "?" . $varName . "=" . $value;
         }
     }
 
-     /**
+    /**
      * @param array $response
      * @param string $lang
      */
