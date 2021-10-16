@@ -45,7 +45,8 @@ trait UtilityTrait
         return array_merge($data, $this->buildPluginInformationHeader());
     }
 
-    private function buildPluginInformationHeader() {
+    private function buildPluginInformationHeader()
+    {
         $data = [];
 
         $pluginVersion = $this->getOption('pluginVersion');
@@ -328,7 +329,8 @@ trait UtilityTrait
     {
         $data = [
             'error' => 'exception',
-            'version' => '0.3'
+            'version' => '0.3',
+            'lang' => null
         ];
 
         $option_error = ['exception', 'array'];
@@ -339,6 +341,11 @@ trait UtilityTrait
         $option_version = ['0.1', '0.2', '0.3'];
         if (isset($options['version']) && in_array($options['version'], $option_version)) {
             $data['version'] = $options['version'];
+        }
+
+        $option_languages = ['en', 'lt', 'lv', 'et', 'fi', 'se', 'ru'];
+        if (isset($options['lang']) && in_array($options['lang'], $option_languages)) {
+            $data['lang'] = $options['lang'];
         }
 
         if (isset($options['pluginVersion'])) {
@@ -445,5 +452,41 @@ trait UtilityTrait
             }
         }
         return $master;
+    }
+
+    /**
+     * Appends query param at the end of url.
+     *
+     * @param string $url
+     * @param string $varName
+     * @param string $value
+     */
+    function appendQueryParam(&$url, $varName, $value)
+    {
+        if(!isset($varName) || !isset($value) ) {
+            return;
+        }
+
+        if (strpos($url, '?'))
+        {
+            $url .= "&" . $varName . "=" . $value;
+        }
+        else
+        {
+            $url .= "?" . $varName . "=" . $value;
+        }
+    }
+
+     /**
+     * @param array $response
+     * @param string $lang
+     */
+    private function addLanguage(&$response, $lang)
+    {
+        if (isset($response['confirmLink'])) {
+            $this->appendQueryParam($response['confirmLink'], 'lang', $lang);
+        } else if (isset($response['authorizationLink'])) {
+            $this->appendQueryParam($response['confirmLink'], 'lang', $lang);
+        }
     }
 }

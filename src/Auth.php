@@ -178,14 +178,16 @@ class Auth implements AuthInterface, EndpointInterface
         }
 
         $jsonData = $this->getAuthBodyAttr($attr);
-
         $data = json_encode($jsonData, JSON_FORCE_OBJECT);
 
         $header = array_merge($this->getAuthHeaderAttr($attr), $this->buildJsonHeader($data));
 
         $response = $this->buildRequest($url, 'POST', $data, $header);
+        $payload = $this->buildResponse($response);
 
-        return $this->buildResponse($response);
+        $this->addLanguage($payload, $this->getOption('lang'));
+
+        return $payload;
     }
 
     /**

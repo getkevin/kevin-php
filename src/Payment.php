@@ -50,8 +50,11 @@ class Payment implements PaymentInterface, EndpointInterface
         $header = array_merge($this->getInitPaymentHeaderAttr($attr), $this->buildJsonHeader($data));
 
         $response = $this->buildRequest($url, 'POST', $data, $header);
+        $payload = $this->buildResponse($response);
 
-        return $this->buildResponse($response);
+        $this->addLanguage($payload, $this->getOption('lang'));
+
+        return $payload;
     }
 
     /**
