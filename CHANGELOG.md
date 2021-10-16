@@ -3,7 +3,8 @@ All notable changes to this project will be documented in this file.
 
 ## [0.14.4] - 2021-10-14
 - Get Project Settings endpoint implementation
-- Implement signature algorithm
+- Implemented signature algorithm
+- Support for UI settings
 
 ## [0.14.3] - 2021-09-20
 - Fixes a bug when Client-Id/Client-Secret is not passed when using Bearer token
