@@ -40,7 +40,7 @@ use Kevin\Client;
 
 $clientId = 'my-client-id';
 $clientSecret = 'my-client-secret';
-$options = ['error' => 'array', 'version' => '0.3'];
+$options = ['error' => 'array', 'version' => '0.3', 'lang' => 'en'];
 
 $kevinClient = new Client($clientId, $clientSecret, $options);
 ```
