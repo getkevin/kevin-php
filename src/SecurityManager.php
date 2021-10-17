@@ -64,7 +64,11 @@ class SecurityManager
      */
     private function verifyTimeout($timestampTimeout, $headers)
     {
-        if (!isset($timestampTimeout) || !isset($headers['X-Kevin-Timestamp'])) {
+        if (!isset($headers['X-Kevin-Timestamp'])) {
+            return false;
+        }
+
+        if (!isset($timestampTimeout)) {
             return true;
         }
 
