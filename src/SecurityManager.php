@@ -32,7 +32,7 @@ class SecurityManager
     /**
      * Verify timestamp timeout in milliseconds.
      *
-     * @param float $timestampTimeout
+     * @param int|null $timestampTimeout
      * @param array $headers
      * @return bool
      */
