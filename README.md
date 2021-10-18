@@ -224,13 +224,13 @@ $response = $kevinClient->payment()->getPaymentRefunds($paymentId);
 use Kevin\SecurityManager;
 
 $endpointSecret = 'your-endpoint-secret';
-$securityManager = new SecurityManager($endpointSecret);
-
 $webhookUrl = 'your-webhook-url';
 $timestampTimeout = 300000;
-$requestBody = file_get_contents("php://input");
 
-$isValid = $securityManager->verifySignature($requestBody, getallheaders(), $webhookUrl, $timestampTimeout);
+$requestBody = file_get_contents("php://input");
+$headers = getallheaders();
+
+$isValid = $securityManager->verifySignature($requestBody, $headers, $webhookUrl, $timestampTimeout);
 ```
 
 ## Support
