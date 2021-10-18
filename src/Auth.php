@@ -185,7 +185,9 @@ class Auth implements AuthInterface, EndpointInterface
         $response = $this->buildRequest($url, 'POST', $data, $header);
         $payload = $this->buildResponse($response);
 
-        $this->addLanguage($payload, $this->getOption('lang'));
+        if (isset($payload['authorizationLink'])) {
+            $payload['authorizationLink'] = $this->appendQueryParam($payload['authorizationLink'], 'lang', $this->getOption('lang'));
+        }
 
         return $payload;
     }

@@ -52,7 +52,9 @@ class Payment implements PaymentInterface, EndpointInterface
         $response = $this->buildRequest($url, 'POST', $data, $header);
         $payload = $this->buildResponse($response);
 
-        $this->addLanguage($payload, $this->getOption('lang'));
+        if (isset($payload['confirmLink'])) {
+            $payload['confirmLink'] = $this->appendQueryParam($payload['confirmLink'], 'lang', $this->getOption('lang'));
+        }
 
         return $payload;
     }

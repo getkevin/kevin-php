@@ -329,8 +329,7 @@ trait UtilityTrait
     {
         $data = [
             'error' => 'exception',
-            'version' => '0.3',
-            'lang' => null
+            'version' => '0.3'
         ];
 
         $option_error = ['exception', 'array'];
@@ -460,30 +459,18 @@ trait UtilityTrait
      * @param string $url
      * @param string $varName
      * @param string $value
+     * @return string
      */
-    function appendQueryParam(&$url, $varName, $value)
+    private function appendQueryParam($url, $varName, $value)
     {
-        if (!isset($varName) || !isset($value)) {
-            return;
+        if (empty($url) || empty($varName) || empty($value)) {
+            return $url;
         }
 
         if (strpos($url, '?')) {
-            $url .= "&" . $varName . "=" . $value;
+            return $url . "&" . $varName . "=" . $value;
         } else {
-            $url .= "?" . $varName . "=" . $value;
-        }
-    }
-
-    /**
-     * @param array $response
-     * @param string $lang
-     */
-    private function addLanguage(&$response, $lang)
-    {
-        if (isset($response['confirmLink'])) {
-            $this->appendQueryParam($response['confirmLink'], 'lang', $lang);
-        } else if (isset($response['authorizationLink'])) {
-            $this->appendQueryParam($response['confirmLink'], 'lang', $lang);
+            return $url . "?" . $varName . "=" . $value;
         }
     }
 }
