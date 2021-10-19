@@ -45,7 +45,8 @@ trait UtilityTrait
         return array_merge($data, $this->buildPluginInformationHeader());
     }
 
-    private function buildPluginInformationHeader() {
+    private function buildPluginInformationHeader()
+    {
         $data = [];
 
         $pluginVersion = $this->getOption('pluginVersion');
@@ -331,14 +332,19 @@ trait UtilityTrait
             'version' => '0.3'
         ];
 
-        $option_error = ['exception', 'array'];
-        if (isset($options['error']) && in_array($options['error'], $option_error)) {
+        $optionError = ['exception', 'array'];
+        if (isset($options['error']) && in_array($options['error'], $optionError)) {
             $data['error'] = $options['error'];
         }
 
-        $option_version = ['0.1', '0.2', '0.3'];
-        if (isset($options['version']) && in_array($options['version'], $option_version)) {
+        $optionVersion = ['0.1', '0.2', '0.3'];
+        if (isset($options['version']) && in_array($options['version'], $optionVersion)) {
             $data['version'] = $options['version'];
+        }
+
+        $optionLanguages = ['en', 'lt', 'lv', 'et', 'fi', 'se', 'ru'];
+        if (isset($options['lang']) && in_array($options['lang'], $optionLanguages)) {
+            $data['lang'] = $options['lang'];
         }
 
         if (isset($options['pluginVersion'])) {
@@ -445,5 +451,26 @@ trait UtilityTrait
             }
         }
         return $master;
+    }
+
+    /**
+     * Appends query param at the end of url.
+     *
+     * @param string $url
+     * @param string $varName
+     * @param string $value
+     * @return string
+     */
+    private function appendQueryParam($url, $varName, $value)
+    {
+        if (empty($url) || empty($varName) || empty($value)) {
+            return $url;
+        }
+
+        if (strpos($url, '?')) {
+            return $url . "&" . $varName . "=" . $value;
+        } else {
+            return $url . "?" . $varName . "=" . $value;
+        }
     }
 }

@@ -50,8 +50,13 @@ class Payment implements PaymentInterface, EndpointInterface
         $header = array_merge($this->getInitPaymentHeaderAttr($attr), $this->buildJsonHeader($data));
 
         $response = $this->buildRequest($url, 'POST', $data, $header);
+        $payload = $this->buildResponse($response);
 
-        return $this->buildResponse($response);
+        if (isset($payload['confirmLink'])) {
+            $payload['confirmLink'] = $this->appendQueryParam($payload['confirmLink'], 'lang', $this->getOption('lang'));
+        }
+
+        return $payload;
     }
 
     /**

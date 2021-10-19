@@ -141,6 +141,25 @@ class Auth implements AuthInterface, EndpointInterface
     }
 
     /**
+     * API Method: Get project settings.
+     * @see https://docs.kevin.eu/public/platform/v0.3#operation/getProjectSettings
+     *
+     * @return array
+     * @throws KevinException
+     */
+    public function getProjectSettings()
+    {
+        $url = $this->getEndpointUrl(self::PATH_PROJECT_SETTINGS);
+
+        $data = '';
+        $header = array_merge($this->buildHeader(), $this->buildJsonHeader($data));
+
+        $response = $this->buildRequest($url, 'GET', $data, $header);
+
+        return $this->buildResponse($response);
+    }
+
+    /**
      * API Method: Start authentication.
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/startAuth
      *
@@ -159,14 +178,18 @@ class Auth implements AuthInterface, EndpointInterface
         }
 
         $jsonData = $this->getAuthBodyAttr($attr);
-
         $data = json_encode($jsonData, JSON_FORCE_OBJECT);
 
         $header = array_merge($this->getAuthHeaderAttr($attr), $this->buildJsonHeader($data));
 
         $response = $this->buildRequest($url, 'POST', $data, $header);
+        $payload = $this->buildResponse($response);
 
-        return $this->buildResponse($response);
+        if (isset($payload['authorizationLink'])) {
+            $payload['authorizationLink'] = $this->appendQueryParam($payload['authorizationLink'], 'lang', $this->getOption('lang'));
+        }
+
+        return $payload;
     }
 
     /**
