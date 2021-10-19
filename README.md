@@ -225,12 +225,14 @@ use Kevin\SecurityManager;
 
 $endpointSecret = 'your-endpoint-secret';
 $webhookUrl = 'your-webhook-url';
+
+// Timestamp is provided in milliseconds
 $timestampTimeout = 300000;
 
 $requestBody = file_get_contents("php://input");
 $headers = getallheaders();
 
-$isValid = $securityManager->verifySignature($requestBody, $headers, $webhookUrl, $timestampTimeout);
+$isValid = SecurityManager::verifySignature($endpointSecret, $requestBody, $headers, $webhookUrl, $timestampTimeout);
 ```
 
 ## Support

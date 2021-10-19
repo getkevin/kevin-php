@@ -21,8 +21,6 @@ class SecurityManager
             return false;
         }
 
-        print_r("good\n");
-
         $data = 'POST' . $webhookUrl . $headers['X-Kevin-Timestamp'] . $requestBody;
         $signature = hash_hmac('sha256', $data, $endpointSecret);
 
