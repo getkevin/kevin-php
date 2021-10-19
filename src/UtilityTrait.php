@@ -332,18 +332,18 @@ trait UtilityTrait
             'version' => '0.3'
         ];
 
-        $option_error = ['exception', 'array'];
-        if (isset($options['error']) && in_array($options['error'], $option_error)) {
+        $optionError = ['exception', 'array'];
+        if (isset($options['error']) && in_array($options['error'], $optionError)) {
             $data['error'] = $options['error'];
         }
 
-        $option_version = ['0.1', '0.2', '0.3'];
-        if (isset($options['version']) && in_array($options['version'], $option_version)) {
+        $optionVersion = ['0.1', '0.2', '0.3'];
+        if (isset($options['version']) && in_array($options['version'], $optionVersion)) {
             $data['version'] = $options['version'];
         }
 
-        $option_languages = ['en', 'lt', 'lv', 'et', 'fi', 'se', 'ru'];
-        if (isset($options['lang']) && in_array($options['lang'], $option_languages)) {
+        $optionLanguages = ['en', 'lt', 'lv', 'et', 'fi', 'se', 'ru'];
+        if (isset($options['lang']) && in_array($options['lang'], $optionLanguages)) {
             $data['lang'] = $options['lang'];
         }
 
