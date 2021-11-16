@@ -17,14 +17,16 @@ class SecurityManager
      */
     public static function verifySignature($endpointSecret, $requestBody, $headers, $webhookUrl, $timestampTimeout = null)
     {
+        $headers = array_change_key_case($headers);
+        
         if (!self::verifyTimeout($timestampTimeout, $headers)) {
             return false;
         }
 
-        $data = 'POST' . $webhookUrl . $headers['X-Kevin-Timestamp'] . $requestBody;
+        $data = 'POST' . $webhookUrl . $headers['x-kevin-timestamp'] . $requestBody;
         $signature = hash_hmac('sha256', $data, $endpointSecret);
 
-        return $signature === $headers['X-Kevin-Signature'];
+        return $signature === $headers['x-kevin-signature'];
     }
 
     /**
@@ -36,7 +38,7 @@ class SecurityManager
      */
     private static function verifyTimeout($timestampTimeout, $headers)
     {
-        if (!isset($headers['X-Kevin-Timestamp'])) {
+        if (!isset($headers['x-kevin-timestamp'])) {
             return false;
         }
 
@@ -44,7 +46,7 @@ class SecurityManager
             return true;
         }
 
-        $timeDifference = (time() * 1000) - $headers['X-Kevin-Timestamp'];
+        $timeDifference = (time() * 1000) - $headers['x-kevin-timestamp'];
 
         return $timestampTimeout > $timeDifference;
     }
