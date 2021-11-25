@@ -39,4 +39,13 @@ interface EndpointInterface
     const PATH_PAYMENT_STATUS = '/pis/payment/{paymentId}/status';
     const PATH_INITIATE_PAYMENT_REFUND = '/pis/payment/{paymentId}/refunds';
     const PATH_GET_PAYMENT_REFUNDS = '/pis/payment/{paymentId}/refunds';
+    
+    /**
+     * List of Account related endpoints.
+     */
+
+    const PATH_ACCOUNT_LIST = '/ais/accounts';
+    const PATH_ACCOUNT_DETAILS = '/ais/accounts/{accountId}';
+    const PATH_ACCOUNT_TRANSACTIONS = '/ais/accounts/{accountId}/transactions';
+    const PATH_ACCOUNT_BALANCE = '/ais/accounts/{accountId}/balance';
 }
