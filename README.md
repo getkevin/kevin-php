@@ -235,6 +235,71 @@ $headers = getallheaders();
 $isValid = SecurityManager::verifySignature($endpointSecret, $requestBody, $headers, $webhookUrl, $timestampTimeout);
 ```
 
+### 4. Account
+
+### 4.1 Get accounts
+
+:exclamation: _Take a note that the example below is for the v0.3 only. The v0.1 and v0.2 requires a slightly different body._
+
+```
+$attr = [
+    'Authorization' => 'Bearer '.$accessToken,
+    'PSU-IP-Address' => 'your-ip-address',
+    'PSU-User-Agent' => 'your-user-agent',
+    'PSU-IP-Port' => 'your-ip-port',
+    'PSU-Http-Method' => 'GET',
+    'PSU-Device-ID' => 'your-device-id'
+];
+$response = $kevinClient->account()->getAccountList($attr);
+```
+
+### 4.2 Get account details
+
+```
+$accountId = 'your-account-id';
+$attr = [
+    'Authorization' => 'Bearer '.$accessToken,
+    'PSU-IP-Address' => 'your-ip-address',
+    'PSU-User-Agent' => 'your-user-agent',
+    'PSU-IP-Port' => 'your-ip-port',
+    'PSU-Http-Method' => 'GET',
+    'PSU-Device-ID' => 'your-device-id'
+];
+$response = $kevinClient->account()->getAccountDetails($accountId, $attr);
+```
+
+### 4.3 Get account transactions
+
+```
+$accountId = 'your-account-id';
+$attr = [
+    'Authorization' => 'Bearer '.$accessToken,
+    'PSU-IP-Address' => 'your-ip-address',
+    'PSU-User-Agent' => 'your-user-agent',
+    'PSU-IP-Port' => 'your-ip-port',
+    'PSU-Http-Method' => 'GET',
+    'PSU-Device-ID' => 'your-device-id',
+    'dateFrom' => '2021-09-01',
+    'dateTo' => '2021-09-15'
+];
+$response = $kevinClient->account()->getAccountTransactions($accountId, $attr);
+```
+
+### 4.4 Get account balance
+
+```
+$accountId = 'your-account-id';
+$attr = [
+    'Authorization' => 'Bearer '.$accessToken,
+    'PSU-IP-Address' => 'your-ip-address',
+    'PSU-User-Agent' => 'your-user-agent',
+    'PSU-IP-Port' => 'your-ip-port',
+    'PSU-Http-Method' => 'GET',
+    'PSU-Device-ID' => 'your-device-id'
+];
+$response = $kevinClient->account()->getAccountBalance($accountId, $attr);
+```
+
 ## Support
 
 Email: help@kevin.eu
