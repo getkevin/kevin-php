@@ -52,19 +52,20 @@ trait AccountTrait
         if (isset($attr['PSU-IP-Address'])) {
             $data[] = 'PSU-IP-Address: ' . $attr['PSU-IP-Address'];
         }
+        if (isset($attr['PSU-IP-Port'])) {
+            $data[] = 'PSU-IP-Port: ' . $attr['PSU-IP-Port'];
+        }
+        if (isset($attr['PSU-User-Agent'])) {
+            $data[] = 'PSU-User-Agent: ' . $attr['PSU-User-Agent'];
+        }
+        if (isset($attr['PSU-Http-Method'])) {
+            $data[] = 'PSU-Http-Method: ' . $attr['PSU-Http-Method'];
+        }
+        
 
         if (in_array($this->getOption('version'), ['0.2', '0.3'])) {
-            if (isset($attr['PSU-IP-Port'])) {
-                $data[] = 'PSU-IP-Port: ' . $attr['PSU-IP-Port'];
-            }
-            if (isset($attr['PSU-User-Agent'])) {
-                $data[] = 'PSU-User-Agent: ' . $attr['PSU-User-Agent'];
-            }
             if (isset($attr['PSU-Device-ID'])) {
                 $data[] = 'PSU-Device-ID: ' . $attr['PSU-Device-ID'];
-            }
-            if (isset($attr['PSU-Http-Method'])) {
-                $data[] = 'PSU-Http-Method: ' . $attr['PSU-Http-Method'];
             }
         }
 
