@@ -51,7 +51,7 @@ class Account implements AccountInterface, EndpointInterface
      * API Method: Get account details.
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/getAccount
      *
-     * @param $accountId
+     * @param string $accountId
      * @param array $attr
      * @return array
      * @throws KevinException

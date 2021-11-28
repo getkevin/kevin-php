@@ -88,7 +88,7 @@ $response = $kevinClient->auth()->getProjectSettings();
 ```
 $attr = [
     'redirectPreferred' => 'false',
-    'scopes' => 'payments',
+    'scopes' => 'payments,accounts_basic',
     'Request-Id' => 'your-guid',
     'Redirect-URL' => 'https://redirect.kevin.eu/authorization.html'
 ];
@@ -214,9 +214,78 @@ $paymentId = 'your-payment-id';
 $response = $kevinClient->payment()->getPaymentRefunds($paymentId);
 ```
 
-### 3. Security
+### 3. Account
 
-### 3.1 Verify signature
+### 3.1 Get accounts
+
+:exclamation: _Take a note that the example below is for the v0.3 only. The v0.1 and v0.2 requires a slightly different body._
+
+```
+$accessToken = 'your-bearer-token';
+$attr = [
+    'Authorization' => $accessToken,
+    'PSU-IP-Address' => 'your-ip-address',
+    'PSU-User-Agent' => 'your-user-agent',
+    'PSU-IP-Port' => 'your-ip-port',
+    'PSU-Http-Method' => 'GET',
+    'PSU-Device-ID' => 'your-device-id'
+];
+$response = $kevinClient->account()->getAccountList($attr);
+```
+
+### 3.2 Get account details
+
+```
+$accountId = 'your-account-id';
+$accessToken = 'your-bearer-token';
+$attr = [
+    'Authorization' => $accessToken,
+    'PSU-IP-Address' => 'your-ip-address',
+    'PSU-User-Agent' => 'your-user-agent',
+    'PSU-IP-Port' => 'your-ip-port',
+    'PSU-Http-Method' => 'GET',
+    'PSU-Device-ID' => 'your-device-id'
+];
+$response = $kevinClient->account()->getAccountDetails($accountId, $attr);
+```
+
+### 3.3 Get account transactions
+
+```
+$accountId = 'your-account-id';
+$accessToken = 'your-bearer-token';
+$attr = [
+    'Authorization' => $accessToken,
+    'PSU-IP-Address' => 'your-ip-address',
+    'PSU-User-Agent' => 'your-user-agent',
+    'PSU-IP-Port' => 'your-ip-port',
+    'PSU-Http-Method' => 'GET',
+    'PSU-Device-ID' => 'your-device-id',
+    'dateFrom' => '2021-09-01',
+    'dateTo' => '2021-09-15'
+];
+$response = $kevinClient->account()->getAccountTransactions($accountId, $attr);
+```
+
+### 3.4 Get account balance
+
+```
+$accountId = 'your-account-id';
+$accessToken = 'your-bearer-token';
+$attr = [
+    'Authorization' => $accessToken,
+    'PSU-IP-Address' => 'your-ip-address',
+    'PSU-User-Agent' => 'your-user-agent',
+    'PSU-IP-Port' => 'your-ip-port',
+    'PSU-Http-Method' => 'GET',
+    'PSU-Device-ID' => 'your-device-id'
+];
+$response = $kevinClient->account()->getAccountBalance($accountId, $attr);
+```
+
+### 4. Security
+
+### 4.1 Verify signature
 
 :exclamation: _We recommend ignoring the webhook if the signature is older than 5 minutes._
 
@@ -233,71 +302,6 @@ $requestBody = file_get_contents("php://input");
 $headers = getallheaders();
 
 $isValid = SecurityManager::verifySignature($endpointSecret, $requestBody, $headers, $webhookUrl, $timestampTimeout);
-```
-
-### 4. Account
-
-### 4.1 Get accounts
-
-:exclamation: _Take a note that the example below is for the v0.3 only. The v0.1 and v0.2 requires a slightly different body._
-
-```
-$attr = [
-    'Authorization' => 'Bearer '.$accessToken,
-    'PSU-IP-Address' => 'your-ip-address',
-    'PSU-User-Agent' => 'your-user-agent',
-    'PSU-IP-Port' => 'your-ip-port',
-    'PSU-Http-Method' => 'GET',
-    'PSU-Device-ID' => 'your-device-id'
-];
-$response = $kevinClient->account()->getAccountList($attr);
-```
-
-### 4.2 Get account details
-
-```
-$accountId = 'your-account-id';
-$attr = [
-    'Authorization' => 'Bearer '.$accessToken,
-    'PSU-IP-Address' => 'your-ip-address',
-    'PSU-User-Agent' => 'your-user-agent',
-    'PSU-IP-Port' => 'your-ip-port',
-    'PSU-Http-Method' => 'GET',
-    'PSU-Device-ID' => 'your-device-id'
-];
-$response = $kevinClient->account()->getAccountDetails($accountId, $attr);
-```
-
-### 4.3 Get account transactions
-
-```
-$accountId = 'your-account-id';
-$attr = [
-    'Authorization' => 'Bearer '.$accessToken,
-    'PSU-IP-Address' => 'your-ip-address',
-    'PSU-User-Agent' => 'your-user-agent',
-    'PSU-IP-Port' => 'your-ip-port',
-    'PSU-Http-Method' => 'GET',
-    'PSU-Device-ID' => 'your-device-id',
-    'dateFrom' => '2021-09-01',
-    'dateTo' => '2021-09-15'
-];
-$response = $kevinClient->account()->getAccountTransactions($accountId, $attr);
-```
-
-### 4.4 Get account balance
-
-```
-$accountId = 'your-account-id';
-$attr = [
-    'Authorization' => 'Bearer '.$accessToken,
-    'PSU-IP-Address' => 'your-ip-address',
-    'PSU-User-Agent' => 'your-user-agent',
-    'PSU-IP-Port' => 'your-ip-port',
-    'PSU-Http-Method' => 'GET',
-    'PSU-Device-ID' => 'your-device-id'
-];
-$response = $kevinClient->account()->getAccountBalance($accountId, $attr);
 ```
 
 ## Support
