@@ -47,7 +47,7 @@ trait AuthTrait
         }
 
         if (isset($attr['scopes'])) {
-            $data['scopes'] = strval($attr['scopes']);
+            $data['scopes'] = explode(',', $attr['scopes']);
         }
 
         return $data;

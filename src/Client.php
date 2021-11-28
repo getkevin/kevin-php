@@ -19,6 +19,13 @@ class Client
      * @var Payment
      */
     private $payment;
+    
+    /**
+     * Account instance.
+     *
+     * @var Account
+     */
+    private $account;
 
     /**
      * Client constructor.
@@ -59,5 +66,18 @@ class Client
         $this->payment = isset($this->payment) ? $this->payment : new Payment($this->clientId, $this->clientSecret, $this->options);
 
         return $this->payment;
+    }
+    
+    /**
+     * Returns Account instance.
+     *
+     * @return Account
+     * @throws KevinException
+     */
+    public function account()
+    {
+        $this->account = isset($this->account) ? $this->account : new Account($this->clientId, $this->clientSecret, $this->options);
+
+        return $this->account;
     }
 }

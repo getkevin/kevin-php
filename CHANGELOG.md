@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.15.0] - 2021-11-28
+- Added support for Account Information Service (AIS)
+- Fixes a bug when multiple authentication scopes could not be supplied
+
 ## [0.14.5] - 2021-11-16
 - Change webhook header names to case insensitive
 
