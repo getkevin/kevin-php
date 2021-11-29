@@ -88,6 +88,10 @@ trait AuthTrait
             $data[] = 'Redirect-URL: ' . $attr['Redirect-URL'];
         }
 
+        if (isset($attr['Webhook-URL'])) {
+            $data[] = 'Webhook-URL: ' . $attr['Webhook-URL'];
+        }
+
         return $data;
     }
 
