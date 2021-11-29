@@ -423,7 +423,7 @@ trait UtilityTrait
                 $base_url = $scheme . $domain . self::BASE_PATH_V03;
                 break;
             default:
-                $base_url = $scheme . $domain . self::BASE_PATH_V02;
+                $base_url = $scheme . $domain . self::BASE_PATH_V03;
         }
 
         return $base_url;
