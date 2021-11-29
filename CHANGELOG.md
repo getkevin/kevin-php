@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.15.1] - 2021-11-29
+- Support for `Webhook-URL` header on authentication
+- New `domain` option to switch between environments easily.
+
 ## [0.15.0] - 2021-11-28
 - Added support for Account Information Service (AIS)
 - Fixes a bug when multiple authentication scopes could not be supplied
