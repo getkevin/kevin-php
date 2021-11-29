@@ -12,9 +12,9 @@ interface EndpointInterface
      */
 
     const SERVICE_NAME = '/platform';
-    const BASE_URL_V01 = self::SERVICE_NAME . '/v0.1';
-    const BASE_URL_V02 = self::SERVICE_NAME . '/v0.2';
-    const BASE_URL_V03 = self::SERVICE_NAME . '/v0.3';
+    const BASE_PATH_V01 = self::SERVICE_NAME . '/v0.1';
+    const BASE_PATH_V02 = self::SERVICE_NAME . '/v0.2';
+    const BASE_PATH_V03 = self::SERVICE_NAME . '/v0.3';
 
     /**
      * List of Auth related endpoints.

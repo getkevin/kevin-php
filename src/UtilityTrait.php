@@ -414,16 +414,16 @@ trait UtilityTrait
 
         switch ($version) {
             case '0.1':
-                $base_url = $scheme . $domain . self::BASE_URL_V01;
+                $base_url = $scheme . $domain . self::BASE_PATH_V01;
                 break;
             case '0.2':
-                $base_url = $scheme . $domain . self::BASE_URL_V02;
+                $base_url = $scheme . $domain . self::BASE_PATH_V02;
                 break;
             case '0.3':
-                $base_url = $scheme . $domain . self::BASE_URL_V03;
+                $base_url = $scheme . $domain . self::BASE_PATH_V03;
                 break;
             default:
-                $base_url = $scheme . $domain . self::BASE_URL_V02;
+                $base_url = $scheme . $domain . self::BASE_PATH_V02;
         }
 
         return $base_url;
