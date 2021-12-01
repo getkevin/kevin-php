@@ -329,7 +329,8 @@ trait UtilityTrait
     {
         $data = [
             'error' => 'exception',
-            'version' => '0.3'
+            'version' => '0.3',
+            'domain' => 'api.kevin.eu'
         ];
 
         $optionError = ['exception', 'array'];
@@ -345,6 +346,11 @@ trait UtilityTrait
         $optionLanguages = ['en', 'lt', 'lv', 'et', 'fi', 'se', 'ru'];
         if (isset($options['lang']) && in_array($options['lang'], $optionLanguages)) {
             $data['lang'] = $options['lang'];
+        }
+
+        $optionDomain = ['api-kevin.eu', 'api-sandbox.kevin.eu', 'api-dev.kevin.eu'];
+        if (isset($options['domain']) && in_array($options['domain'], $optionDomain)) {
+            $data['domain'] = $options['domain'];
         }
 
         if (isset($options['pluginVersion'])) {
@@ -403,19 +409,21 @@ trait UtilityTrait
     private function getBaseUrl()
     {
         $version = $this->getOption('version');
+        $domain = $this->getOption('domain');
+        $scheme = 'https://';
 
         switch ($version) {
             case '0.1':
-                $base_url = self::BASE_URL_V01;
+                $base_url = $scheme . $domain . self::BASE_PATH_V01;
                 break;
             case '0.2':
-                $base_url = self::BASE_URL_V02;
+                $base_url = $scheme . $domain . self::BASE_PATH_V02;
                 break;
             case '0.3':
-                $base_url = self::BASE_URL_V03;
+                $base_url = $scheme . $domain . self::BASE_PATH_V03;
                 break;
             default:
-                $base_url = self::BASE_URL_V02;
+                $base_url = $scheme . $domain . self::BASE_PATH_V03;
         }
 
         return $base_url;
