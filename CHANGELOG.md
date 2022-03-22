@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.15.2] - 2022-03-22
+- Fix style using PHP CS Fixer
+
 ## [0.15.1] - 2021-11-29
 - Support for `Webhook-URL` header on authentication
 - New `domain` option to switch between environments easily.

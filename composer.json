@@ -12,6 +12,13 @@
     "support": {
         "email": "help@kevin.eu"
     },
+    "scripts": {
+        "fix-style": "vendor/bin/php-cs-fixer fix --config ./.php.cs.fixer.php --allow-risky=yes",
+        "check-style": "vendor/bin/php-cs-fixer fix --config ./.php.cs.fixer.php --allow-risky=yes --dry-run --verbose"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.19"
+    },
     "require": {
         "php": ">=5.6",
         "ext-json": "*"

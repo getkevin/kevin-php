@@ -4,8 +4,6 @@ namespace Kevin;
 
 /**
  * Trait providing helper methods used for authentication.
- *
- * @package Kevin
  */
 trait AuthTrait
 {
@@ -15,6 +13,7 @@ trait AuthTrait
      * Extract query attributes used for bank action.
      *
      * @param array $attr
+     *
      * @return array
      */
     private function getBankQueryAttr($attr = [])
@@ -22,7 +21,7 @@ trait AuthTrait
         $data = [];
 
         if (isset($attr['countryCode'])) {
-            $data['countryCode'] = strval($attr['countryCode']);
+            $data['countryCode'] = (string) ($attr['countryCode']);
         }
 
         return $data;
@@ -32,6 +31,7 @@ trait AuthTrait
      * Extract query attributes used for authentication action.
      *
      * @param array $attr
+     *
      * @return array
      */
     private function getAuthQueryAttr($attr = [])
@@ -39,11 +39,11 @@ trait AuthTrait
         $data = [];
 
         if (isset($attr['bankId'])) {
-            $data['bankId'] = strval($attr['bankId']);
+            $data['bankId'] = (string) ($attr['bankId']);
         }
 
         if (isset($attr['redirectPreferred'])) {
-            $data['redirectPreferred'] = boolval(filter_var($attr['redirectPreferred'], FILTER_VALIDATE_BOOLEAN)) ? 'true' : 'false';
+            $data['redirectPreferred'] = (bool) (filter_var($attr['redirectPreferred'], \FILTER_VALIDATE_BOOLEAN)) ? 'true' : 'false';
         }
 
         if (isset($attr['scopes'])) {
@@ -57,6 +57,7 @@ trait AuthTrait
      * Extract body attributes used for authentication action.
      *
      * @param array $attr
+     *
      * @return array
      */
     private function getAuthBodyAttr($attr = [])
@@ -64,7 +65,7 @@ trait AuthTrait
         $data = [];
 
         if (isset($attr['email'])) {
-            $data['email'] = strval($attr['email']);
+            $data['email'] = (string) ($attr['email']);
         }
 
         return $data;
@@ -74,6 +75,7 @@ trait AuthTrait
      * Extract header attributes used for authentication action.
      *
      * @param array $attr
+     *
      * @return array
      */
     private function getAuthHeaderAttr($attr = [])
@@ -81,16 +83,16 @@ trait AuthTrait
         $data = $this->buildHeader();
 
         if (isset($attr['Request-Id'])) {
-            $data[] = 'Request-Id: ' . $attr['Request-Id'];
+            $data[] = 'Request-Id: '.$attr['Request-Id'];
         }
 
         if (isset($attr['Redirect-URL'])) {
-            $data[] = 'Redirect-URL: ' . $attr['Redirect-URL'];
+            $data[] = 'Redirect-URL: '.$attr['Redirect-URL'];
         }
 
-        if ($this->getOption('version') == '0.3') {
+        if ('0.3' == $this->getOption('version')) {
             if (isset($attr['Webhook-URL'])) {
-                $data[] = 'Webhook-URL: ' . $attr['Webhook-URL'];
+                $data[] = 'Webhook-URL: '.$attr['Webhook-URL'];
             }
         }
 
@@ -101,17 +103,18 @@ trait AuthTrait
      * Extract body attributes used for access token action.
      *
      * @param array $attr
+     *
      * @return array
      */
     private function getReceiveTokenBodyAttr($attr = [])
     {
         $data = ['grantType' => 'authorizationCode'];
 
-        if (is_string($attr)) {
+        if (\is_string($attr)) {
             $data['code'] = $attr;
         } else {
             if (isset($attr['code'])) {
-                $data['code'] = strval($attr['code']);
+                $data['code'] = (string) ($attr['code']);
             }
         }
 
@@ -122,17 +125,18 @@ trait AuthTrait
      * Extract body attributes used for refresh token action.
      *
      * @param array $attr
+     *
      * @return array
      */
     private function getRefreshTokenBodyAttr($attr = [])
     {
         $data = ['grantType' => 'refreshToken'];
 
-        if (is_string($attr)) {
+        if (\is_string($attr)) {
             $data['refreshToken'] = $attr;
         } else {
             if (isset($attr['refreshToken'])) {
-                $data['refreshToken'] = strval($attr['refreshToken']);
+                $data['refreshToken'] = (string) ($attr['refreshToken']);
             }
         }
 
@@ -143,17 +147,18 @@ trait AuthTrait
      * Extract header attributes used for token content action.
      *
      * @param array $attr
+     *
      * @return array|string
      */
     private function getReceiveTokenContentHeaderAttr($attr = [])
     {
         $data = $this->buildHeader();
 
-        if (is_string($attr)) {
-            $data[] = 'Authorization: ' . $this->unifyBearerToken($attr);
+        if (\is_string($attr)) {
+            $data[] = 'Authorization: '.$this->unifyBearerToken($attr);
         } else {
             if (isset($attr['Authorization'])) {
-                $data[] = 'Authorization: ' . $this->unifyBearerToken($attr['Authorization']);
+                $data[] = 'Authorization: '.$this->unifyBearerToken($attr['Authorization']);
             }
         }
 

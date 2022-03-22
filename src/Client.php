@@ -19,7 +19,7 @@ class Client
      * @var Payment
      */
     private $payment;
-    
+
     /**
      * Account instance.
      *
@@ -32,7 +32,8 @@ class Client
      *
      * @param string $clientId
      * @param string $clientSecret
-     * @param array $options
+     * @param array  $options
+     *
      * @throws KevinException
      */
     public function __construct($clientId = '', $clientSecret = '', $options = [])
@@ -46,6 +47,7 @@ class Client
      * Returns Auth instance.
      *
      * @return Auth
+     *
      * @throws KevinException
      */
     public function auth()
@@ -59,6 +61,7 @@ class Client
      * Returns Payment instance.
      *
      * @return Payment
+     *
      * @throws KevinException
      */
     public function payment()
@@ -67,11 +70,12 @@ class Client
 
         return $this->payment;
     }
-    
+
     /**
      * Returns Account instance.
      *
      * @return Account
+     *
      * @throws KevinException
      */
     public function account()

@@ -304,6 +304,17 @@ $headers = getallheaders();
 $isValid = SecurityManager::verifySignature($endpointSecret, $requestBody, $headers, $webhookUrl, $timestampTimeout);
 ```
 
+## Contributing
+Before making any code changes, make sure to run `composer install` to install development requirements.
+
+We are using PHP CS Fixer GitHub action to conduct code style checks for each commit and pull request. Make sure to run `composer fix-style` before
+committing changes to make sure your code matches our style standards. Pull requests with failed style checks will not
+be approved.
+
+*WARNING*: we use risky rules so make sure to check for breaking style fixes.
+
+Style errors and violated rules log can be viewed by running `composer check-style` command.
+
 ## Support
 
 Email: help@kevin.eu

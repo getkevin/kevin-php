@@ -4,8 +4,6 @@ namespace Kevin;
 
 /**
  * Class Auth.
- *
- * @package Kevin
  */
 class Auth implements AuthInterface, EndpointInterface
 {
@@ -16,7 +14,8 @@ class Auth implements AuthInterface, EndpointInterface
      *
      * @param string $clientId
      * @param string $clientSecret
-     * @param array $options
+     * @param array  $options
+     *
      * @throws KevinException
      */
     public function __construct($clientId = '', $clientSecret = '', $options = [])
@@ -28,9 +27,11 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Get supported countries.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/getCountries
      *
      * @return array
+     *
      * @throws KevinException
      */
     public function getCountries()
@@ -48,10 +49,13 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Get supported banks.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/getBanks
      *
      * @param array $attr
+     *
      * @return array
+     *
      * @throws KevinException
      */
     public function getBanks($attr = [])
@@ -59,9 +63,9 @@ class Auth implements AuthInterface, EndpointInterface
         $url = $this->getEndpointUrl(self::PATH_BANKS);
 
         $queryData = $this->getBankQueryAttr($attr);
-        if (count($queryData)) {
+        if (\count($queryData)) {
             $query = http_build_query($queryData, '', '&');
-            $url = $url . '?' . $query;
+            $url = $url.'?'.$query;
         }
 
         $data = '';
@@ -75,10 +79,13 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Get supported bank.
+     *
      * @see: https://docs.kevin.eu/public/platform/v0.3#operation/getBank
      *
      * @param string $bankId
+     *
      * @return array
+     *
      * @throws KevinException
      */
     public function getBank($bankId)
@@ -99,10 +106,13 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Get supported bank by card number piece.
+     *
      * @see: https://docs.kevin.eu/public/platform/v0.3#operation/getBankByCardNumberPiece
      *
      * @param string $cardNumberPiece
+     *
      * @return array
+     *
      * @throws KevinException
      */
     public function getBankByCardNumberPiece($cardNumberPiece)
@@ -123,9 +133,11 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Get supported payment methods.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/getPaymentMethods
      *
      * @return array
+     *
      * @throws KevinException
      */
     public function getPaymentMethods()
@@ -142,9 +154,11 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Get project settings.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/getProjectSettings
      *
      * @return array
+     *
      * @throws KevinException
      */
     public function getProjectSettings()
@@ -161,10 +175,13 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Start authentication.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/startAuth
      *
      * @param array $attr
+     *
      * @return array
+     *
      * @throws KevinException
      */
     public function auth($attr = [])
@@ -172,13 +189,13 @@ class Auth implements AuthInterface, EndpointInterface
         $url = $this->getEndpointUrl(self::PATH_AUTH);
 
         $queryData = $this->getAuthQueryAttr($attr);
-        if (count($queryData)) {
+        if (\count($queryData)) {
             $query = http_build_query($queryData, '', '&');
-            $url = $url . '?' . $query;
+            $url = $url.'?'.$query;
         }
 
         $jsonData = $this->getAuthBodyAttr($attr);
-        $data = json_encode($jsonData, JSON_FORCE_OBJECT);
+        $data = json_encode($jsonData, \JSON_FORCE_OBJECT);
 
         $header = array_merge($this->getAuthHeaderAttr($attr), $this->buildJsonHeader($data));
 
@@ -196,7 +213,9 @@ class Auth implements AuthInterface, EndpointInterface
      * API Method: Start authentication.
      *
      * @param array $attr
+     *
      * @return array
+     *
      * @throws KevinException
      *
      * @see \Kevin\Auth::auth();
@@ -208,10 +227,13 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Receive token.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/receiveToken
      *
      * @param array $attr
+     *
      * @return array|string
+     *
      * @throws KevinException
      */
     public function receiveToken($attr = [])
@@ -230,10 +252,13 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Refresh token.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/receiveToken
      *
      * @param array $attr
+     *
      * @return array|string
+     *
      * @throws KevinException
      */
     public function refreshToken($attr = [])
@@ -252,10 +277,13 @@ class Auth implements AuthInterface, EndpointInterface
 
     /**
      * API Method: Receive token content.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/receiveTokenContent
      *
      * @param array $attr
+     *
      * @return array|string
+     *
      * @throws KevinException
      */
     public function receiveTokenContent($attr = [])
