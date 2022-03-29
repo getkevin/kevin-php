@@ -97,7 +97,7 @@ class Account implements AccountInterface, EndpointInterface
         $url = $this->gluePath($url, $accountId);
 
         $queryData = $this->getAccountTransactionsQueryAttr($attr);
-        if (\count($queryData)) {
+        if (count($queryData)) {
             $query = http_build_query($queryData, '', '&');
             $url = $url.'?'.$query;
         }

@@ -151,7 +151,7 @@ trait PaymentTrait
             $data[] = 'PSU-IP-Address: '.$attr['PSU-IP-Address'];
         }
 
-        if (\in_array($this->getOption('version'), ['0.2', '0.3'])) {
+        if (in_array($this->getOption('version'), ['0.2', '0.3'])) {
             if (isset($attr['PSU-IP-Port'])) {
                 $data[] = 'PSU-IP-Port: '.$attr['PSU-IP-Port'];
             }
@@ -181,7 +181,7 @@ trait PaymentTrait
             $data[] = 'PSU-IP-Address: '.$attr['PSU-IP-Address'];
         }
 
-        if (\in_array($this->getOption('version'), ['0.2', '0.3'])) {
+        if (in_array($this->getOption('version'), ['0.2', '0.3'])) {
             if (isset($attr['PSU-User-Agent'])) {
                 $data[] = 'PSU-User-Agent: '.$attr['PSU-User-Agent'];
             }

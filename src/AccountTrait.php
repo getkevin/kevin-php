@@ -62,7 +62,7 @@ trait AccountTrait
             $data[] = 'PSU-Http-Method: '.$attr['PSU-Http-Method'];
         }
 
-        if (\in_array($this->getOption('version'), ['0.2', '0.3'])) {
+        if (in_array($this->getOption('version'), ['0.2', '0.3'])) {
             if (isset($attr['PSU-Device-ID'])) {
                 $data[] = 'PSU-Device-ID: '.$attr['PSU-Device-ID'];
             }

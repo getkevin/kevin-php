@@ -45,7 +45,7 @@ class SecurityManager
             return false;
         }
 
-        if (null === $timestampTimeout) {
+        if ($timestampTimeout === null) {
             return true;
         }
 

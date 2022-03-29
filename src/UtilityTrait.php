@@ -51,15 +51,15 @@ trait UtilityTrait
         $pluginPlatform = $this->getOption('pluginPlatform');
         $pluginPlatformVersion = $this->getOption('pluginPlatformVersion');
 
-        if (null !== $pluginVersion) {
+        if ($pluginVersion !== null) {
             $data[] = 'Plugin-Version: '.$pluginVersion;
         }
 
-        if (null !== $pluginPlatform) {
+        if ($pluginPlatform !== null) {
             $data[] = 'Plugin-Platform: '.$pluginPlatform;
         }
 
-        if (null !== $pluginPlatformVersion) {
+        if ($pluginPlatformVersion !== null) {
             $data[] = 'Plugin-Platform-Version: '.$pluginPlatformVersion;
         }
 
@@ -76,10 +76,10 @@ trait UtilityTrait
     private function buildJsonHeader($data)
     {
         $length = 0;
-        if (\is_string($data)) {
-            $length = \strlen($data);
-        } elseif (\is_array($data)) {
-            $length = \strlen(json_encode($data));
+        if (is_string($data)) {
+            $length = strlen($data);
+        } elseif (is_array($data)) {
+            $length = strlen(json_encode($data));
         }
 
         return [
@@ -105,7 +105,7 @@ trait UtilityTrait
         $parsed = parse_url($url);
 
         $host = $parsed['host'];
-        if ('https' === $parsed['scheme']) {
+        if ($parsed['scheme'] === 'https') {
             $prefix = 'ssl://';
             $port = 443;
         } else {
@@ -134,7 +134,7 @@ trait UtilityTrait
         $data = array_merge($default_headers, $header);
         $data[] = 'Connection: Close';
         $data[] = ''; // Separator
-        if ('POST' === $type) {
+        if ($type === 'POST') {
             $data[] = "$jsonData\r\n";
         }
 
@@ -156,7 +156,7 @@ trait UtilityTrait
         $header = explode("\r\n", $header);
         $code = -1;
         foreach ($header as $value) {
-            if ('HTTP' === substr($value, 0, 4)) {
+            if (substr($value, 0, 4) === 'HTTP') {
                 preg_match('/(\b[0-9]{3})\b/', $value, $matches);
                 $code = $matches[1];
                 break;
@@ -230,7 +230,7 @@ trait UtilityTrait
     private function unifyBearerToken($token)
     {
         $str = 'bearer';
-        if (substr(strtolower($token), 0, \strlen($str)) === $str) {
+        if (substr(strtolower($token), 0, strlen($str)) === $str) {
             return $token;
         } else {
             return 'Bearer '.$token;
@@ -264,7 +264,7 @@ trait UtilityTrait
         $pattern = '/\{.*?\}/';
 
         $matched = preg_match_all($pattern, $url);
-        if ($matched !== \count($parameters)) {
+        if ($matched !== count($parameters)) {
             throw new KevinException('Parameter mismatch.');
         }
 
@@ -325,11 +325,9 @@ trait UtilityTrait
     /**
      * Process options attribute values.
      *
-     * @param array $options
-     *
      * @return array
      */
-    private function processOptionsAttributes($options)
+    private function processOptionsAttributes(array $options)
     {
         $data = [
             'error' => 'exception',
@@ -338,22 +336,22 @@ trait UtilityTrait
         ];
 
         $optionError = ['exception', 'array'];
-        if (isset($options['error']) && \in_array($options['error'], $optionError)) {
+        if (isset($options['error']) && in_array($options['error'], $optionError)) {
             $data['error'] = $options['error'];
         }
 
         $optionVersion = ['0.1', '0.2', '0.3'];
-        if (isset($options['version']) && \in_array($options['version'], $optionVersion)) {
+        if (isset($options['version']) && in_array($options['version'], $optionVersion)) {
             $data['version'] = $options['version'];
         }
 
         $optionLanguages = ['en', 'lt', 'lv', 'et', 'fi', 'se', 'ru'];
-        if (isset($options['lang']) && \in_array($options['lang'], $optionLanguages)) {
+        if (isset($options['lang']) && in_array($options['lang'], $optionLanguages)) {
             $data['lang'] = $options['lang'];
         }
 
         $optionDomain = ['api-kevin.eu', 'api-sandbox.kevin.eu', 'api-dev.kevin.eu'];
-        if (isset($options['domain']) && \in_array($options['domain'], $optionDomain)) {
+        if (isset($options['domain']) && in_array($options['domain'], $optionDomain)) {
             $data['domain'] = $options['domain'];
         }
 
@@ -372,10 +370,8 @@ trait UtilityTrait
 
     /**
      * Set up options attribute values.
-     *
-     * @param array $options
      */
-    private function setOptionsAttributes($options)
+    private function setOptionsAttributes(array $options)
     {
         $this->options = $this->processOptionsAttributes($options);
     }
@@ -387,11 +383,11 @@ trait UtilityTrait
      */
     private function initialize()
     {
-        if (!\function_exists('curl_version')) {
+        if (!function_exists('curl_version')) {
             throw new KevinException('CURL is not enabled.');
         }
 
-        if (!\strlen($this->clientId) || !\strlen($this->clientSecret)) {
+        if (!strlen($this->clientId) || !strlen($this->clientSecret)) {
             throw new KevinException('ClientID and ClientSecret are required.');
         }
     }
@@ -450,7 +446,7 @@ trait UtilityTrait
      */
     private function intersectArrayRecursively($master, $mask)
     {
-        if (!\is_array($master)) {
+        if (!is_array($master)) {
             return $master;
         }
 
@@ -459,7 +455,7 @@ trait UtilityTrait
                 unset($master[$k]);
                 continue;
             }
-            if (\is_array($mask[$k])) {
+            if (is_array($mask[$k])) {
                 $master[$k] = $this->intersectArrayRecursively($master[$k], $mask[$k]);
             }
         }

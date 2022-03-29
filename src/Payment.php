@@ -41,7 +41,7 @@ class Payment implements PaymentInterface, EndpointInterface
         $url = $this->getEndpointUrl(self::PATH_INIT_PAYMENT);
 
         $queryData = $this->getPaymentQueryAttr($attr);
-        if (\count($queryData)) {
+        if (count($queryData)) {
             $query = http_build_query($queryData, '', '&');
             $url = $url.'?'.$query;
         }
@@ -152,6 +152,7 @@ class Payment implements PaymentInterface, EndpointInterface
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/getPaymentRefunds
      *
      * @param string $paymentId
+     * @param array  $attr
      *
      * @return array
      *

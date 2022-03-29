@@ -63,7 +63,7 @@ class Auth implements AuthInterface, EndpointInterface
         $url = $this->getEndpointUrl(self::PATH_BANKS);
 
         $queryData = $this->getBankQueryAttr($attr);
-        if (\count($queryData)) {
+        if (count($queryData)) {
             $query = http_build_query($queryData, '', '&');
             $url = $url.'?'.$query;
         }
@@ -189,7 +189,7 @@ class Auth implements AuthInterface, EndpointInterface
         $url = $this->getEndpointUrl(self::PATH_AUTH);
 
         $queryData = $this->getAuthQueryAttr($attr);
-        if (\count($queryData)) {
+        if (count($queryData)) {
             $query = http_build_query($queryData, '', '&');
             $url = $url.'?'.$query;
         }

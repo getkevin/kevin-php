@@ -90,7 +90,7 @@ trait AuthTrait
             $data[] = 'Redirect-URL: '.$attr['Redirect-URL'];
         }
 
-        if ('0.3' == $this->getOption('version')) {
+        if ($this->getOption('version') == '0.3') {
             if (isset($attr['Webhook-URL'])) {
                 $data[] = 'Webhook-URL: '.$attr['Webhook-URL'];
             }
@@ -110,7 +110,7 @@ trait AuthTrait
     {
         $data = ['grantType' => 'authorizationCode'];
 
-        if (\is_string($attr)) {
+        if (is_string($attr)) {
             $data['code'] = $attr;
         } else {
             if (isset($attr['code'])) {
@@ -132,7 +132,7 @@ trait AuthTrait
     {
         $data = ['grantType' => 'refreshToken'];
 
-        if (\is_string($attr)) {
+        if (is_string($attr)) {
             $data['refreshToken'] = $attr;
         } else {
             if (isset($attr['refreshToken'])) {
@@ -154,7 +154,7 @@ trait AuthTrait
     {
         $data = $this->buildHeader();
 
-        if (\is_string($attr)) {
+        if (is_string($attr)) {
             $data[] = 'Authorization: '.$this->unifyBearerToken($attr);
         } else {
             if (isset($attr['Authorization'])) {
