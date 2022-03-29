@@ -67,6 +67,10 @@ trait AuthTrait
         if (isset($attr['email'])) {
             $data['email'] = (string) ($attr['email']);
         }
+        
+        if (isset($attr['cardMethod'])) {
+            $data['cardMethod'] = [];
+        }
 
         return $data;
     }
