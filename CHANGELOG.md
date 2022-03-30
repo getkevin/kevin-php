@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.15.3] - 2022-03-29
+- Fix style using PHP CS Fixer
+- Add PHP CS Fixer GitHub action to verify commits
+
 ## [0.15.2] - 2022-03-25
 - Fix card linking
 

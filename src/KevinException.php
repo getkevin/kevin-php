@@ -6,8 +6,6 @@ use Exception;
 
 /**
  * Exception class used to throw errors in Kevin library.
- *
- * @package Kevin
  */
 class KevinException extends Exception
 {
@@ -19,9 +17,9 @@ class KevinException extends Exception
     /**
      * KevinException constructor.
      *
-     * @param string $message
-     * @param int $code
-     * @param null $previous
+     * @param string      $message
+     * @param int         $code
+     * @param null        $previous
      * @param string|null $data
      */
     public function __construct($message, $code = 0, $previous = null, $data = null)
@@ -45,6 +43,6 @@ class KevinException extends Exception
      */
     public function __toString()
     {
-        return __CLASS__ . ": [{$this->code}]: {$this->message}" . PHP_EOL;
+        return __CLASS__.": [{$this->code}]: {$this->message}".\PHP_EOL;
     }
 }

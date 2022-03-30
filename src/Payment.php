@@ -4,8 +4,6 @@ namespace Kevin;
 
 /**
  * Class Payment.
- *
- * @package Kevin
  */
 class Payment implements PaymentInterface, EndpointInterface
 {
@@ -16,7 +14,8 @@ class Payment implements PaymentInterface, EndpointInterface
      *
      * @param string $clientId
      * @param string $clientSecret
-     * @param array $options
+     * @param array  $options
+     *
      * @throws KevinException
      */
     public function __construct($clientId = '', $clientSecret = '', $options = [])
@@ -28,10 +27,13 @@ class Payment implements PaymentInterface, EndpointInterface
 
     /**
      * API Method: Initiate payment.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/initiatePayment
      *
      * @param array $attr
+     *
      * @return array
+     *
      * @throws KevinException
      */
     public function initPayment($attr = [])
@@ -41,11 +43,11 @@ class Payment implements PaymentInterface, EndpointInterface
         $queryData = $this->getPaymentQueryAttr($attr);
         if (count($queryData)) {
             $query = http_build_query($queryData, '', '&');
-            $url = $url . '?' . $query;
+            $url = $url.'?'.$query;
         }
 
         $jsonData = $this->getInitPaymentBodyAttr($attr);
-        $data = json_encode($jsonData, JSON_FORCE_OBJECT);
+        $data = json_encode($jsonData, \JSON_FORCE_OBJECT);
 
         $header = array_merge($this->getInitPaymentHeaderAttr($attr), $this->buildJsonHeader($data));
 
@@ -61,11 +63,14 @@ class Payment implements PaymentInterface, EndpointInterface
 
     /**
      * API Method: Get payment.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/getPayment
      *
      * @param $paymentId
      * @param array $attr
+     *
      * @return array
+     *
      * @throws KevinException
      */
     public function getPayment($paymentId, $attr = [])
@@ -85,12 +90,15 @@ class Payment implements PaymentInterface, EndpointInterface
     }
 
     /**
-     * API Method: Get payment status
+     * API Method: Get payment status.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/getPaymentStatus
      *
      * @param string $paymentId
-     * @param array $attr
+     * @param array  $attr
+     *
      * @return array
+     *
      * @throws KevinException
      */
     public function getPaymentStatus($paymentId, $attr = [])
@@ -110,12 +118,15 @@ class Payment implements PaymentInterface, EndpointInterface
     }
 
     /**
-     * API Method: Initiate payment refund
+     * API Method: Initiate payment refund.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/initiatePaymentRefund
      *
      * @param string $paymentId
-     * @param array $attr
+     * @param array  $attr
+     *
      * @return array
+     *
      * @throws KevinException
      */
     public function initiatePaymentRefund($paymentId, $attr = [])
@@ -136,12 +147,15 @@ class Payment implements PaymentInterface, EndpointInterface
     }
 
     /**
-     * API Method: Get payment refunds
+     * API Method: Get payment refunds.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/getPaymentRefunds
      *
      * @param string $paymentId
-     * @param array $attr
+     * @param array  $attr
+     *
      * @return array
+     *
      * @throws KevinException
      */
     public function getPaymentRefunds($paymentId)

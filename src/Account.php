@@ -4,8 +4,6 @@ namespace Kevin;
 
 /**
  * Class Account.
- *
- * @package Kevin
  */
 class Account implements AccountInterface, EndpointInterface
 {
@@ -16,7 +14,8 @@ class Account implements AccountInterface, EndpointInterface
      *
      * @param string $clientId
      * @param string $clientSecret
-     * @param array $options
+     * @param array  $options
+     *
      * @throws KevinException
      */
     public function __construct($clientId = '', $clientSecret = '', $options = [])
@@ -28,10 +27,13 @@ class Account implements AccountInterface, EndpointInterface
 
     /**
      * API Method: Get account list.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/getAccounts
      *
      * @param array $attr
+     *
      * @return array
+     *
      * @throws KevinException
      */
     public function getAccountList($attr = [])
@@ -49,11 +51,14 @@ class Account implements AccountInterface, EndpointInterface
 
     /**
      * API Method: Get account details.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/getAccount
      *
      * @param string $accountId
-     * @param array $attr
+     * @param array  $attr
+     *
      * @return array
+     *
      * @throws KevinException
      */
     public function getAccountDetails($accountId, $attr = [])
@@ -73,12 +78,15 @@ class Account implements AccountInterface, EndpointInterface
     }
 
     /**
-     * API Method: Get account transactions
+     * API Method: Get account transactions.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/getAccountTransactions
      *
      * @param string $accountId
-     * @param array $attr
+     * @param array  $attr
+     *
      * @return array
+     *
      * @throws KevinException
      */
     public function getAccountTransactions($accountId, $attr = [])
@@ -87,11 +95,11 @@ class Account implements AccountInterface, EndpointInterface
 
         $url = $this->getEndpointUrl(self::PATH_ACCOUNT_TRANSACTIONS);
         $url = $this->gluePath($url, $accountId);
-        
+
         $queryData = $this->getAccountTransactionsQueryAttr($attr);
         if (count($queryData)) {
             $query = http_build_query($queryData, '', '&');
-            $url = $url . '?' . $query;
+            $url = $url.'?'.$query;
         }
 
         $data = '';
@@ -104,12 +112,15 @@ class Account implements AccountInterface, EndpointInterface
     }
 
     /**
-     * API Method: Get account balance
+     * API Method: Get account balance.
+     *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/getAccountBalance
      *
      * @param string $accountId
-     * @param array $attr
+     * @param array  $attr
+     *
      * @return array
+     *
      * @throws KevinException
      */
     public function getAccountBalance($accountId, $attr = [])

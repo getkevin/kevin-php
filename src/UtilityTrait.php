@@ -4,8 +4,6 @@ namespace Kevin;
 
 /**
  * Trait providing helper methods used globally.
- *
- * @package Kevin
  */
 trait UtilityTrait
 {
@@ -38,8 +36,8 @@ trait UtilityTrait
     private function buildHeader()
     {
         $data = [
-            'Client-Id: ' . $this->clientId,
-            'Client-Secret: ' . $this->clientSecret,
+            'Client-Id: '.$this->clientId,
+            'Client-Secret: '.$this->clientSecret,
         ];
 
         return array_merge($data, $this->buildPluginInformationHeader());
@@ -54,15 +52,15 @@ trait UtilityTrait
         $pluginPlatformVersion = $this->getOption('pluginPlatformVersion');
 
         if ($pluginVersion !== null) {
-            $data[] = 'Plugin-Version: ' . $pluginVersion;
+            $data[] = 'Plugin-Version: '.$pluginVersion;
         }
 
         if ($pluginPlatform !== null) {
-            $data[] = 'Plugin-Platform: ' . $pluginPlatform;
+            $data[] = 'Plugin-Platform: '.$pluginPlatform;
         }
 
         if ($pluginPlatformVersion !== null) {
-            $data[] = 'Plugin-Platform-Version: ' . $pluginPlatformVersion;
+            $data[] = 'Plugin-Platform-Version: '.$pluginPlatformVersion;
         }
 
         return $data;
@@ -72,6 +70,7 @@ trait UtilityTrait
      * Build array with JSON data used in request header.
      *
      * @param array|string $data
+     *
      * @return array
      */
     private function buildJsonHeader($data)
@@ -79,13 +78,13 @@ trait UtilityTrait
         $length = 0;
         if (is_string($data)) {
             $length = strlen($data);
-        } else if (is_array($data)) {
+        } elseif (is_array($data)) {
             $length = strlen(json_encode($data));
         }
 
         return [
             'Content-Type: application/json',
-            'Content-Length: ' . $length
+            'Content-Length: '.$length,
         ];
     }
 
@@ -95,8 +94,10 @@ trait UtilityTrait
      * @param string $url
      * @param string $type
      * @param string $jsonData
-     * @param array $header
+     * @param array  $header
+     *
      * @return array
+     *
      * @throws KevinException
      */
     private function buildRequest($url, $type, $jsonData, $header)
@@ -116,30 +117,29 @@ trait UtilityTrait
             $jsonData = urldecode($jsonData);
         }
 
-        $fp = fsockopen($prefix . $host, $port, $err_no, $err_str, 10);
+        $fp = fsockopen($prefix.$host, $port, $err_no, $err_str, 10);
         if (!$fp) {
-
             return $this->returnFailure(sprintf('Connection cannot be established to %s', $url));
         }
 
-        $path = $parsed['path'] . (isset($parsed['query']) ? '?' . $parsed['query'] : '');
+        $path = $parsed['path'].(isset($parsed['query']) ? '?'.$parsed['query'] : '');
 
         $default_headers = [
             "$type $path HTTP/1.1",
             "Host: $host",
-            "Accept: */*",
-            "Accept-Encoding: *"
+            'Accept: */*',
+            'Accept-Encoding: *',
         ];
 
         $data = array_merge($default_headers, $header);
-        $data[] = "Connection: Close";
-        $data[] = ""; // Separator
+        $data[] = 'Connection: Close';
+        $data[] = ''; // Separator
         if ($type === 'POST') {
             $data[] = "$jsonData\r\n";
         }
 
         foreach ($data as $value) {
-            fputs($fp, "$value\r\n");
+            fwrite($fp, "$value\r\n");
         }
 
         $response = '';
@@ -165,7 +165,7 @@ trait UtilityTrait
 
         return [
             'code' => $code,
-            'data' => $result
+            'data' => $result,
         ];
     }
 
@@ -173,7 +173,9 @@ trait UtilityTrait
      * Build default response array.
      *
      * @param array $response
+     *
      * @return array
+     *
      * @throws KevinException
      */
     private function buildResponse($response)
@@ -222,17 +224,16 @@ trait UtilityTrait
      * Process authorization header bearer prefix.
      *
      * @param $token
+     *
      * @return string
      */
     private function unifyBearerToken($token)
     {
         $str = 'bearer';
         if (substr(strtolower($token), 0, strlen($str)) === $str) {
-
             return $token;
         } else {
-
-            return 'Bearer ' . $token;
+            return 'Bearer '.$token;
         }
     }
 
@@ -240,6 +241,7 @@ trait UtilityTrait
      * Process string value parameter used in request query or path attributes.
      *
      * @param string $string
+     *
      * @return string
      */
     private function escParam($string = '')
@@ -251,8 +253,10 @@ trait UtilityTrait
      * Process url parameters and glue them into path.
      *
      * @param string $url
-     * @param array $parameters
+     * @param array  $parameters
+     *
      * @return string
+     *
      * @throws KevinException
      */
     private function gluePath($url, ...$parameters)
@@ -261,7 +265,6 @@ trait UtilityTrait
 
         $matched = preg_match_all($pattern, $url);
         if ($matched !== count($parameters)) {
-
             throw new KevinException('Parameter mismatch.');
         }
 
@@ -275,8 +278,6 @@ trait UtilityTrait
     /**
      * Process and set up values based on supplied schema array.
      *
-     * @param array $schema
-     * @param array $attr
      * @return array
      */
     private function processSchemaAttributes(array $schema, array $attr)
@@ -287,11 +288,13 @@ trait UtilityTrait
     /**
      * Return failure response based on option value.
      *
-     * @param string $message
-     * @param int $code
-     * @param string $name
+     * @param string      $message
+     * @param int         $code
+     * @param string      $name
      * @param string|null $data
+     *
      * @return array[]
+     *
      * @throws KevinException
      */
     private function returnFailure($message = '', $code = -1, $name = 'Exception', $data = null)
@@ -322,7 +325,6 @@ trait UtilityTrait
     /**
      * Process options attribute values.
      *
-     * @param array $options
      * @return array
      */
     private function processOptionsAttributes(array $options)
@@ -330,7 +332,7 @@ trait UtilityTrait
         $data = [
             'error' => 'exception',
             'version' => '0.3',
-            'domain' => 'api.kevin.eu'
+            'domain' => 'api.kevin.eu',
         ];
 
         $optionError = ['exception', 'array'];
@@ -368,8 +370,6 @@ trait UtilityTrait
 
     /**
      * Set up options attribute values.
-     *
-     * @param array $options
      */
     private function setOptionsAttributes(array $options)
     {
@@ -384,18 +384,17 @@ trait UtilityTrait
     private function initialize()
     {
         if (!function_exists('curl_version')) {
-
             throw new KevinException('CURL is not enabled.');
         }
 
         if (!strlen($this->clientId) || !strlen($this->clientSecret)) {
-
             throw new KevinException('ClientID and ClientSecret are required.');
         }
     }
 
     /**
      * @param string $option
+     *
      * @return mixed|null
      */
     private function getOption($option)
@@ -414,16 +413,16 @@ trait UtilityTrait
 
         switch ($version) {
             case '0.1':
-                $base_url = $scheme . $domain . self::BASE_PATH_V01;
+                $base_url = $scheme.$domain.self::BASE_PATH_V01;
                 break;
             case '0.2':
-                $base_url = $scheme . $domain . self::BASE_PATH_V02;
+                $base_url = $scheme.$domain.self::BASE_PATH_V02;
                 break;
             case '0.3':
-                $base_url = $scheme . $domain . self::BASE_PATH_V03;
+                $base_url = $scheme.$domain.self::BASE_PATH_V03;
                 break;
             default:
-                $base_url = $scheme . $domain . self::BASE_PATH_V03;
+                $base_url = $scheme.$domain.self::BASE_PATH_V03;
         }
 
         return $base_url;
@@ -431,16 +430,18 @@ trait UtilityTrait
 
     /**
      * @param string $path
+     *
      * @return string
      */
     private function getEndpointUrl($path = '')
     {
-        return $this->getBaseUrl() . $path;
+        return $this->getBaseUrl().$path;
     }
 
     /**
      * @param array $master
      * @param array $mask
+     *
      * @return array
      */
     private function intersectArrayRecursively($master, $mask)
@@ -451,13 +452,14 @@ trait UtilityTrait
 
         foreach ($master as $k => $v) {
             if (!isset($mask[$k])) {
-                unset ($master[$k]);
+                unset($master[$k]);
                 continue;
             }
             if (is_array($mask[$k])) {
                 $master[$k] = $this->intersectArrayRecursively($master[$k], $mask[$k]);
             }
         }
+
         return $master;
     }
 
@@ -467,6 +469,7 @@ trait UtilityTrait
      * @param string $url
      * @param string $varName
      * @param string $value
+     *
      * @return string
      */
     private function appendQueryParam($url, $varName, $value)
@@ -476,9 +479,9 @@ trait UtilityTrait
         }
 
         if (strpos($url, '?')) {
-            return $url . "&" . $varName . "=" . $value;
+            return $url.'&'.$varName.'='.$value;
         } else {
-            return $url . "?" . $varName . "=" . $value;
+            return $url.'?'.$varName.'='.$value;
         }
     }
 }
