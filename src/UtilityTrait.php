@@ -350,7 +350,7 @@ trait UtilityTrait
             $data['lang'] = $options['lang'];
         }
 
-        $optionDomain = ['api-kevin.eu', 'api-sandbox.kevin.eu', 'api-dev.kevin.eu'];
+        $optionDomain = ['api.kevin.eu', 'api-sandbox.kevin.eu', 'api-dev.kevin.eu'];
         if (isset($options['domain']) && in_array($options['domain'], $optionDomain)) {
             $data['domain'] = $options['domain'];
         }
