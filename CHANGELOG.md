@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ## [0.16.0] - 2022-03-29
-- Remove get bank by card number functionality
+- Remove get bank by card number endpoint implementation
 
 ## [0.15.3] - 2022-03-29
 - Fix style using PHP CS Fixer
