@@ -345,8 +345,7 @@ trait UtilityTrait
             $data['version'] = $options['version'];
         }
 
-        $optionLanguages = ['en', 'lt', 'lv', 'et', 'fi', 'se', 'ru'];
-        if (isset($options['lang']) && in_array($options['lang'], $optionLanguages)) {
+        if (isset($options['lang'])) {
             $data['lang'] = $options['lang'];
         }
 
