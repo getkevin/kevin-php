@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.16.1] - 2022-04-19
+- Remove language validation
+
 ## [0.16.0] - 2022-03-29
 - Remove get bank by card number endpoint implementation
 - Fix typo in api domain reference
