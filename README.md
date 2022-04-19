@@ -54,6 +54,8 @@ $kevinClient = new Client($clientId, $clientSecret, $options);
 > - `error` - Defines return type of error data. Possible values are: `array` - returns an array on error, `exception` - throws an exception on error, default value is `exception`.
 >
 > - `version` - Selects API versions to use. Default value is `0.3`. Possible values are `0.1`, `0.2` or `0.3`.
+>
+> - `lang` - a two-letter lowercase language code defined in ISO 639-1 standart. Sets the language of the frame page.
 
 ### 1. Authentication
 
