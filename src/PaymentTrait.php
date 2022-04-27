@@ -65,6 +65,12 @@ trait PaymentTrait
                 'creditorAccount' => [
                     'iban' => '',
                 ],
+                'debtorAccount' => [
+                    'iban' => '',
+                    'bban' => '',
+                    'sortCodeAccountNumber' => '',
+                    'currencyCode' => '',
+                ],
             ],
             'cardPaymentMethod' => [
                 'cvc' => '',
