@@ -50,20 +50,32 @@ trait PaymentTrait
                 'iban' => '',
                 'bban' => '',
                 'sortCodeAccountNumber' => '',
+                'currencyCode' => '',
             ],
             'debtorAccount' => [
                 'iban' => '',
                 'bban' => '',
                 'sortCodeAccountNumber' => '',
+                'currencyCode' => '',
             ],
             'bankPaymentMethod' => [
                 'creditorName' => '',
                 'endToEndId' => '',
                 'informationStructured' => [
                     'reference' => '',
+                    'referenceType' => '',
                 ],
                 'creditorAccount' => [
                     'iban' => '',
+                    'bban' => '',
+                    'sortCodeAccountNumber' => '',
+                    'currencyCode' => '',
+                ],
+                'debtorAccount' => [
+                    'iban' => '',
+                    'bban' => '',
+                    'sortCodeAccountNumber' => '',
+                    'currencyCode' => '',
                 ],
             ],
             'cardPaymentMethod' => [
@@ -147,11 +159,10 @@ trait PaymentTrait
     {
         $data = $this->buildHeader();
 
-        if (isset($attr['PSU-IP-Address'])) {
-            $data[] = 'PSU-IP-Address: '.$attr['PSU-IP-Address'];
-        }
-
-        if (in_array($this->getOption('version'), ['0.2', '0.3'])) {
+        if ($this->getOption('version') === '0.2') {
+            if (isset($attr['PSU-IP-Address'])) {
+                $data[] = 'PSU-IP-Address: '.$attr['PSU-IP-Address'];
+            }
             if (isset($attr['PSU-IP-Port'])) {
                 $data[] = 'PSU-IP-Port: '.$attr['PSU-IP-Port'];
             }
@@ -177,11 +188,10 @@ trait PaymentTrait
     {
         $data = $this->buildHeader();
 
-        if (isset($attr['PSU-IP-Address'])) {
-            $data[] = 'PSU-IP-Address: '.$attr['PSU-IP-Address'];
-        }
-
-        if (in_array($this->getOption('version'), ['0.2', '0.3'])) {
+        if ($this->getOption('version') === '0.2') {
+            if (isset($attr['PSU-IP-Address'])) {
+                $data[] = 'PSU-IP-Address: '.$attr['PSU-IP-Address'];
+            }
             if (isset($attr['PSU-User-Agent'])) {
                 $data[] = 'PSU-User-Agent: '.$attr['PSU-User-Agent'];
             }
