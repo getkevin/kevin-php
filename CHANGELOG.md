@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.16.2] - 2022-05-02
+- Update payment initiation schema
+- Remove headers from the `getPayment` and `getPaymentStatus` endpoint on v0.3 version
+
 ## [0.16.1] - 2022-04-19
 - Remove language validation
 
