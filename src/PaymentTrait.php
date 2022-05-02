@@ -50,20 +50,26 @@ trait PaymentTrait
                 'iban' => '',
                 'bban' => '',
                 'sortCodeAccountNumber' => '',
+                'currencyCode' => '',
             ],
             'debtorAccount' => [
                 'iban' => '',
                 'bban' => '',
                 'sortCodeAccountNumber' => '',
+                'currencyCode' => '',
             ],
             'bankPaymentMethod' => [
                 'creditorName' => '',
                 'endToEndId' => '',
                 'informationStructured' => [
                     'reference' => '',
+                    'referenceType' => '',
                 ],
                 'creditorAccount' => [
                     'iban' => '',
+                    'bban' => '',
+                    'sortCodeAccountNumber' => '',
+                    'currencyCode' => '',
                 ],
                 'debtorAccount' => [
                     'iban' => '',
