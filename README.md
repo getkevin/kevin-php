@@ -157,11 +157,11 @@ $attr = [
         'endToEndId' => '1',
         'creditorName' => 'John Smith',
         'creditorAccount' => [
-            'iban' => 'LT144010051005081586'
+            'iban' => 'LT144010051005081586',
         ],
     ],
     'cardPaymentMethod' => [],
-    'paymentMethodPreferred' => 'card'
+    'paymentMethodPreferred' => 'card',
 ];
 $response = $kevinClient->payment()->initPayment($attr);
 ```
