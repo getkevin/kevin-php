@@ -21,7 +21,7 @@ trait AuthTrait
         $data = [];
 
         if (isset($attr['countryCode'])) {
-            $data['countryCode'] = (string) ($attr['countryCode']);
+            $data['countryCode'] = (string) $attr['countryCode'];
         }
 
         return $data;
@@ -39,7 +39,7 @@ trait AuthTrait
         $data = [];
 
         if (isset($attr['bankId'])) {
-            $data['bankId'] = (string) ($attr['bankId']);
+            $data['bankId'] = (string) $attr['bankId'];
         }
 
         if (isset($attr['redirectPreferred'])) {
@@ -65,7 +65,7 @@ trait AuthTrait
         $data = [];
 
         if (isset($attr['email'])) {
-            $data['email'] = (string) ($attr['email']);
+            $data['email'] = (string) $attr['email'];
         }
 
         if (isset($attr['cardMethod'])) {
@@ -118,7 +118,7 @@ trait AuthTrait
             $data['code'] = $attr;
         } else {
             if (isset($attr['code'])) {
-                $data['code'] = (string) ($attr['code']);
+                $data['code'] = (string) $attr['code'];
             }
         }
 
@@ -140,7 +140,7 @@ trait AuthTrait
             $data['refreshToken'] = $attr;
         } else {
             if (isset($attr['refreshToken'])) {
-                $data['refreshToken'] = (string) ($attr['refreshToken']);
+                $data['refreshToken'] = (string) $attr['refreshToken'];
             }
         }
 

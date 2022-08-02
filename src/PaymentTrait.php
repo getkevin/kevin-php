@@ -21,7 +21,7 @@ trait PaymentTrait
         $data = [];
 
         if (isset($attr['bankId'])) {
-            $data['bankId'] = (string) ($attr['bankId']);
+            $data['bankId'] = (string) $attr['bankId'];
         }
 
         if (isset($attr['redirectPreferred'])) {
@@ -29,7 +29,7 @@ trait PaymentTrait
         }
 
         if (isset($attr['paymentMethodPreferred'])) {
-            $data['paymentMethodPreferred'] = (string) ($attr['paymentMethodPreferred']);
+            $data['paymentMethodPreferred'] = (string) $attr['paymentMethodPreferred'];
         }
 
         return $data;

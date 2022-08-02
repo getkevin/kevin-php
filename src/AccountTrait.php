@@ -21,11 +21,11 @@ trait AccountTrait
         $data = [];
 
         if (isset($attr['dateFrom'])) {
-            $data['dateFrom'] = (string) ($attr['dateFrom']);
+            $data['dateFrom'] = (string) $attr['dateFrom'];
         }
 
         if (isset($attr['dateTo'])) {
-            $data['dateTo'] = (string) ($attr['dateTo']);
+            $data['dateTo'] = (string) $attr['dateTo'];
         }
 
         return $data;
