@@ -153,13 +153,15 @@ $attr = [
     'description' => 'Test',
     'currencyCode' => 'EUR',
     'amount' => '0.01',
-    'cardPaymentMethod' => [
-        'cvc' => '123',
-        'expMonth' => '01',
-        'expYear' => '2036',
-        'number' => '5555555555555555',
-        'holderName' => 'John Titor',
+    'bankPaymentMethod' => [
+        'endToEndId' => '1',
+        'creditorName' => 'John Smith',
+        'creditorAccount' => [
+            'iban' => 'LT144010051005081586'
+        ],
     ],
+    'cardPaymentMethod' => [],
+    'paymentMethodPreferred' => 'card'
 ];
 $response = $kevinClient->payment()->initPayment($attr);
 ```
