@@ -368,13 +368,14 @@ trait UtilityTrait
             $data['pluginPlatformVersion'] = $options['pluginPlatformVersion'];
         }
 
-        if (isset($options['port']) && 1 <= $options['port'] && $options['port'] <= 65535) {
-            $data['port'] = (int)$options['port'];
+        if (isset($options['port']) && $options['port'] >= 1 && $options['port'] <= 65535) {
+            $data['port'] = (int) $options['port'];
         }
 
         if (isset($options['scheme']) && in_array($options['scheme'], ['https', 'http'], true)) {
             $data['scheme'] = $options['scheme'];
         }
+
         return $data;
     }
 
