@@ -105,13 +105,15 @@ trait UtilityTrait
         $parsed = parse_url($url);
 
         $host = $parsed['host'];
+        $prefix = '';
+        $port = 80;
+
         if ($parsed['scheme'] === 'https') {
             $prefix = 'ssl://';
             $port = 443;
-        } else {
-            $prefix = '';
-            $port = 80;
         }
+
+        $port = isset($this->options['port']) ? $this->options['port'] : $port;
 
         if (preg_match('/(%[0-9A-F]{2})/', $jsonData)) {
             $jsonData = urldecode($jsonData);
@@ -333,6 +335,8 @@ trait UtilityTrait
             'error' => 'exception',
             'version' => '0.3',
             'domain' => 'api.kevin.eu',
+            'port' => null,
+            'scheme' => 'https',
         ];
 
         $optionError = ['exception', 'array'];
@@ -362,6 +366,14 @@ trait UtilityTrait
         }
         if (isset($options['pluginPlatformVersion'])) {
             $data['pluginPlatformVersion'] = $options['pluginPlatformVersion'];
+        }
+
+        if (isset($options['port']) && $options['port'] >= 1 && $options['port'] <= 65535) {
+            $data['port'] = (int) $options['port'];
+        }
+
+        if (isset($options['scheme']) && in_array($options['scheme'], ['https', 'http'], true)) {
+            $data['scheme'] = $options['scheme'];
         }
 
         return $data;
@@ -408,7 +420,7 @@ trait UtilityTrait
     {
         $version = $this->getOption('version');
         $domain = $this->getOption('domain');
-        $scheme = 'https://';
+        $scheme = $this->getOption('scheme').'://';
 
         switch ($version) {
             case '0.1':
