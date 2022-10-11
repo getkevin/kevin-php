@@ -261,7 +261,7 @@ trait UtilityTrait
      *
      * @throws KevinException
      */
-    private function gluePath($url, ...$parameters)
+    private function gluePath($url, $parameters)
     {
         $pattern = '/\{.*?\}/';
 

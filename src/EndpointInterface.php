@@ -11,9 +11,9 @@ interface EndpointInterface
      * Base URL used for sending API calls.
      */
     const SERVICE_NAME = '/platform';
-    const BASE_PATH_V01 = self::SERVICE_NAME.'/v0.1';
-    const BASE_PATH_V02 = self::SERVICE_NAME.'/v0.2';
-    const BASE_PATH_V03 = self::SERVICE_NAME.'/v0.3';
+    const BASE_PATH_V01 = '/platform/v0.1';
+    const BASE_PATH_V02 = '/platform/v0.2';
+    const BASE_PATH_V03 = '/platform/v0.3';
 
     /**
      * List of Auth related endpoints.
