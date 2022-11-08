@@ -138,7 +138,7 @@ $attr = [
         'endToEndId' => '1',
         'creditorName' => 'John Smith',
         'creditorAccount' => [
-            'iban' => 'LT144010051005081586'
+            'iban' => 'LT0000000000000000'
         ],
     ],
 ];
@@ -157,7 +157,7 @@ $attr = [
         'endToEndId' => '1',
         'creditorName' => 'John Smith',
         'creditorAccount' => [
-            'iban' => 'LT144010051005081586',
+            'iban' => 'LT0000000000000000',
         ],
     ],
     'cardPaymentMethod' => [],
@@ -178,7 +178,7 @@ $attr = [
         'endToEndId' => '1',
         'creditorName' => 'John Smith',
         'creditorAccount' => [
-            'iban' => 'LT144010051005081586'
+            'iban' => 'LT0000000000000000'
         ],
     ],
     'cardPaymentMethod' => [],

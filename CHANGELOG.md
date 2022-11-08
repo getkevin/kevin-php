@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.17.1] - 2022-11-08
+- Update README.md
+
 ## [0.17.0] - 2022-09-15
 - Add `scheme` and `port` keys to the options array property
 
