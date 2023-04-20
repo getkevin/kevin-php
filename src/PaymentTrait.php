@@ -48,13 +48,11 @@ trait PaymentTrait
             'creditorName' => '',
             'creditorAccount' => [
                 'iban' => '',
-                'bban' => '',
                 'sortCodeAccountNumber' => '',
                 'currencyCode' => '',
             ],
             'debtorAccount' => [
                 'iban' => '',
-                'bban' => '',
                 'sortCodeAccountNumber' => '',
                 'currencyCode' => '',
             ],
@@ -67,13 +65,11 @@ trait PaymentTrait
                 ],
                 'creditorAccount' => [
                     'iban' => '',
-                    'bban' => '',
                     'sortCodeAccountNumber' => '',
                     'currencyCode' => '',
                 ],
                 'debtorAccount' => [
                     'iban' => '',
-                    'bban' => '',
                     'sortCodeAccountNumber' => '',
                     'currencyCode' => '',
                 ],

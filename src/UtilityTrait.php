@@ -225,7 +225,7 @@ trait UtilityTrait
     /**
      * Process authorization header bearer prefix.
      *
-     * @param $token
+     * @param string $token
      *
      * @return string
      */
