@@ -7,7 +7,7 @@ use Exception;
 /**
  * Exception class used to throw errors in Kevin library.
  */
-class KevinException extends Exception
+class KevinException extends \Exception
 {
     /**
      * @var string|null

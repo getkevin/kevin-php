@@ -66,7 +66,7 @@ class Payment implements PaymentInterface, EndpointInterface
      *
      * @see https://docs.kevin.eu/public/platform/v0.3#operation/getPayment
      *
-     * @param $paymentId
+     * @param string $paymentId
      * @param array $attr
      *
      * @return array
